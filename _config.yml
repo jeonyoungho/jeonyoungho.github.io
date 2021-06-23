@@ -36,7 +36,7 @@ social:
     - https://www.instagram.com/jyho_o/
     # - https://www.linkedin.com/in/username
 
-google_site_verification: eonGeSiIVfF48EnFoJqakC7h2hUzgqxFNJaxkfPiGr0 # change to your verification string
+google_site_verification: "eonGeSiIVfF48EnFoJqakC7h2hUzgqxFNJaxkfPiGr0" # change to your verification string
 # --------------------------
 
 # Only if your site type is GitHub Project sites and doesn't have a custom domain,
