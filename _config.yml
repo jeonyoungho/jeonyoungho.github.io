@@ -3,10 +3,10 @@
 # Import the theme
 theme: jekyll-theme-chirpy
 
-title: Youngho's blog # the main title
+title: Youngho's Devlog # the main title
 tagline: steadily every day # it will display as the sub-title
 description: >- # used by seo meta and the atom feed
-  Youngho's blog
+  Youngho's Devlog
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: "https://jeonyoungho.github.io"
