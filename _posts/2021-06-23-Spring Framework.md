@@ -1,5 +1,5 @@
 ---
-title: "[개발자 블로그] Spring"
+title: "[개발자 블로그] Spring Framework"
 # post의 layout이 기본적으로 post으로 설정되어있어서 Front Matter에 따로 layout변수를 만들어 주지 않아도 된다.
 date: 2021-06-23 13:00:00 +0800
 categories: [Spring] # categories는 최대 2개까지 가능
