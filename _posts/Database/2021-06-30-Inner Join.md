@@ -1,6 +1,6 @@
 ---
 title: "[개발자 블로그] Inner Join" # post의 layout이 기본적으로 post로 설정되어있어서 Front Matter에 따로 layout변수를 만들어 주지 않아도 됨
-date: 2021-06-30 00:00:00 +0800
+date: 2021-06-30 +0800
 categories: [Database] # categories는 최대 2개까지 가능
 tags: [database, sql, innerjoin] # TAG는 반드시 소문자로 이루어져야함, 0~무한개까지 지정 가능
 toc: true # Table Of Content(TOC) 옵션, 기본적으로 포스트의 오른쪽 패널에 위치
@@ -48,18 +48,3 @@ WHERE "buy".BUY_ID = 'buy3'
 
 - 위의 결과를 생성하기 위해서 아래와 같은 과정을 거친다.
 
-~~~
-1. buy테이블의 'buy3' USER_ID를 추출해낸다.
-
-2. 'buy3'와 동일한 값을 customer에서 검색한다.
-
-3.'buy3'라는 USER_ID를 찾으면, buy테이블과 customer의 모든 칼럼을 결합(Join)한다.
-
-* 만약, 위 예제에서 where문이 빠져 있다면, 모든 구매기록에 대해 customer + buy 테이블의 결합이 발생하게 된다.
-~~~
-
-- <b>위의 예시를 토대로 INNER JOIN은 조인될 조건이 부합하는 행에 대해서만 Join이 발생하는 것임을 알 수 있다.<b>
-
-#### 출처
-- [http://egloos.zum.com/sweeper/v/3002133](http://egloos.zum.com/sweeper/v/3002133)
-- [https://dimdim.tistory.com/entry/SQL-JOIN-%EC%A0%95%EB%A6%AC-Inner-Join-Outer-Join](https://dimdim.tistory.com/entry/SQL-JOIN-%EC%A0%95%EB%A6%AC-Inner-Join-Outer-Join)
