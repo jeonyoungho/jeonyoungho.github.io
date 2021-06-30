@@ -2,24 +2,24 @@
 title: "IntelliJ 디버깅" # post의 layout이 기본적으로 post로 설정되어있어서 Front Matter에 따로 layout변수를 만들어 주지 않아도 됨
 date: 2021-06-30 +0800
 categories: [IntelliJ, 단축키] # categories는 최대 2개까지 가능
-tags:  # TAG는 반드시 소문자로 이루어져야함, 0~무한개까지 지정 가능
+tags: [IntelliJ, 디버깅] # TAG는 반드시 소문자로 이루어져야함, 0~무한개까지 지정 가능
 toc: true # Table Of Content(TOC) 옵션, 기본적으로 포스트의 오른쪽 패널에 위치
 comments: true # 댓글 유무 지정
 # image: /assets/img/test.png # Preview image
 # pin: true # 홈페이지 메인화면에 특정 게시물 고정
 ---
 
-# Debugging
+# IntelliJ 디버깅
 -  프로그래밍에 있어 디버깅은 필수적인 요소이며 실제 개발할 때에도 가장 중요한 부분이다. 디버깅을 얼마나 잘하느냐에 따라 프로그래머의 실력이 갈릴 정도로 프로그래머에게 있어 가장 중요한 능력이 디버깅 능력이다.
-- [디버깅의 중요성](https://github.com/jeonyoungho/TIL/blob/master/ComputerScience/Debugging.md)
+- [Debugging](https://jeonyoungho.github.io/posts/Debugging/)
 
-### 디버깅을 하기 전에
+# 디버깅을 하기 전에
 - <b>습관적으로 run을 실행하지만, 로컬 개발에선 웬만하면 debug로 실행하자!</b>
 - 애플리케이션 실행 중에 break point를 사용하려면 debug여야만 한다.
 - 코드 좌측의 여백을 우클릭하면 <b>Show Line Numbers</b>가 나오는데 이를 체크하면 아래의 그림과 같이 Line번호가 부여된다. 에러가 발생했을 때, 몇 번째 Line에서 발생했는지 log에 표시되는데, Line번호가 없으면 에러의 위치를 발견하기가 힘들다.<br>
 <img width="884" alt="스크린샷 2021-05-17 오후 7 05 45" src="https://user-images.githubusercontent.com/44339530/118471628-ebfec900-b742-11eb-9faf-09aa303e9f39.png">
 
-### Break Point 설정 방법
+# Break Point 설정 방법
 - 1)라인 넘버와 코드 사이의 여백을 클릭<br>
 <img width="1041" alt="스크린샷 2021-05-17 오후 7 07 11" src="https://user-images.githubusercontent.com/44339530/118471802-194b7700-b743-11eb-978a-b770d2c0504c.png"><br>
 
@@ -27,22 +27,22 @@ comments: true # 댓글 유무 지정
     - 특히나 for, while 등의 반복문에서 특정값이 들어올때만 break를 걸고 싶을 때 유용<br>
 <img width="1021" alt="스크린샷 2021-05-17 오후 7 09 04" src="https://user-images.githubusercontent.com/44339530/118472027-5adc2200-b743-11eb-9481-e3d7301be685.png"><br>
 
-### 디버깅 버튼
+# 디버깅 버튼
 ![1](https://user-images.githubusercontent.com/44339530/118472133-75ae9680-b743-11eb-80cd-a3a4dace39ae.png)<br>
 
-#### resume
+## resume
 - 단축키: option + command + r
 - 기능: 다음 break point로 이동
 
-#### step over
+## step over
 - 단축키: F8
 - 기능: 현재 break된 파일에서 다음 라인 이동
 
-#### step into
+## step into
 - 단축키: F7
 - 기능: 현재 break된 라인에서 실행하고 있는 라인 내부로 이동
 
-#### Force step into
+## Force step into
 - 단축키: option + shift + F7
 - 기능: 다음 실행되는 라인으로 이동하나, step into와 달리 Stepping을 무시하고 진행
     - 예를 들어, command + shift + a -> stepping으로 설정창을 오픈 후<br>
@@ -52,12 +52,12 @@ comments: true # 댓글 유무 지정
     - 그러면 step into시 getter메소드라면 skip할 것이고 force step into는 getter메소드 내부로 이동할 것이다.
     - <b>굳이 확인이 불필요한 getter, 생서자 등에 skip 옵션을 설정 후, skip이 필요할 시에는 step into로, 전부 확인이 필요할시에는 force step into로 이동하며 디버깅하면 유용하다.</b>
 
-#### step out
+## step out
 - 단축키: shift + F8
 - 기능: 현재 break된 라인에서 호출한 곳으로 이동한다.
     - step into로 파고 들어간 내부 메소드에서 호출했던 외부 메소드로 빠져나올시에 사용한다. 
 
-#### drop frame
+## drop frame
 - 단축키 : 없음
 - 기능 : call stack을 거슬러 올라간다.
     - <b>step out과 별차이 없어 보이는데, 큰 차이점은 step out은 해당 라인이 실행된 후 돌아가지만, drop frame은 해당 라인이 실행되기 전에 돌아간다. 예시로 살펴보자.</b><br>
@@ -72,7 +72,7 @@ comments: true # 댓글 유무 지정
     - <img width="893" alt="스크린샷 2021-05-17 오후 7 30 02" src="https://user-images.githubusercontent.com/44339530/118474680-48afb300-b746-11eb-9a13-a5824dd76e57.png"><br>
     - 위의 그림과 같이 getTemp메소드가 실행되지 않고 롤백되어 호출했던 곳으로 돌아가기에 콘솔창에는 아무것도 출력되지 않는다.
 
-#### Run to Cursor
+## Run to Cursor
 - 단축키: option + F9
 - 기능: 포커스 되어있는 라인으로 이동
 - 예시<br>
@@ -83,7 +83,7 @@ comments: true # 댓글 유무 지정
 
 - <b>보통 break point로 지정하지 않고, 단발성으로 break를 걸고 싶을 때 사용한다.</b>
 
-#### Evaluate&Watch그리고 Call Stack
+## Evaluate&Watch그리고 Call Stack
 - 위에 있는 것들은 break line을 사용하는 법과 이동하는 방법과 관련이 있다.
 - 이제는 break된 라인에서 어떤 일이 가능한지 확인할 것이다.
 
@@ -119,7 +119,7 @@ comments: true # 댓글 유무 지정
     - 이동 후에는, break line에서 했던 것처럼 variables와 watches를 이용해 확인하고자 하는 값과 코드를 확인하면 된다.
     - 특히 spring과 같은 프레임워크에서 어떻게 코드가 실행되고 값이 변경되는지 확인할 때 굉장히 유용하게 사용된다. 
 
-### 디버깅 관련 단축키 정리
+# 디버깅 관련 단축키 정리
 - 디버그 모드로 실행하기
     - 현재 포커스가 있는 곳을 디버그 실행 : Ctrl + Shift + D
     - 상단 탭이 가리키는 곳을 디버그 실행 : Ctrl + D
@@ -134,5 +134,5 @@ comments: true # 댓글 유무 지정
 - Watch (브레이크 이후의 코드 변경 확인하기) : 안경 모양 버튼
 
 #### 출처
-- https://jojoldu.tistory.com/149
-- https://higugu.tistory.com/entry/IntelliJ-%EB%94%94%EB%B2%84%EA%B9%85-%EB%8B%A8%EC%B6%95%ED%82%A4-%EB%A7%A5-%EA%B8%B0%EC%A4%80?category=833857
+- [https://jojoldu.tistory.com/149](https://jojoldu.tistory.com/149)
+- [https://higugu.tistory.com/entry/IntelliJ-%EB%94%94%EB%B2%84%EA%B9%85-%EB%8B%A8%EC%B6%95%ED%82%A4-%EB%A7%A5-%EA%B8%B0%EC%A4%80?category=833857](https://higugu.tistory.com/entry/IntelliJ-%EB%94%94%EB%B2%84%EA%B9%85-%EB%8B%A8%EC%B6%95%ED%82%A4-%EB%A7%A5-%EA%B8%B0%EC%A4%80?category=833857)

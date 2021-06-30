@@ -2,27 +2,26 @@
 title: "IntelliJ 단축키" # post의 layout이 기본적으로 post로 설정되어있어서 Front Matter에 따로 layout변수를 만들어 주지 않아도 됨
 date: 2021-06-30 +0800
 categories: [IntelliJ, 단축키] # categories는 최대 2개까지 가능
-tags:  # TAG는 반드시 소문자로 이루어져야함, 0~무한개까지 지정 가능
+tags: [IntelliJ, 단축키] # TAG는 반드시 소문자로 이루어져야함, 0~무한개까지 지정 가능
 toc: true # Table Of Content(TOC) 옵션, 기본적으로 포스트의 오른쪽 패널에 위치
 comments: true # 댓글 유무 지정
 # image: /assets/img/test.png # Preview image
 # pin: true # 홈페이지 메인화면에 특정 게시물 고정
 ---
 
-# ShortCut(유용한 단축키)
-
-### 오류 수정 관련 단축키
+# IntelliJ 단축키
+## 오류 수정 관련 단축키
 - Alt + Enter: 현재 컨텍스트에 대한 액션을 표시하여 뭐든지 수정하는 데 사용
 - Command + N: 변수나 클래스위에 커서가 있을 경우 생성자, getter, setter와 같은 것들을 자동으로 만들어줌
 
-### 찾기 관련 단축키
+## 찾기 관련 단축키
 - Shift + Shift: 전체 검색(file, action 모두 검색)
 - Command + Shift + A: action 검색(설정, Refactor 등)
 - Command + Shift + O: 파일 찾기
 - Command + O: 최근 열었떤 파일 리스트 보기
 - Command + [/ command+]: 이전/다음 포커스로 이동
 
-### 코드 수정 관련 단축키
+## 코드 수정 관련 단축키
 - 라인 복사하기: Command + D
 - 라인 삭제하기: Command + Delete
 - 라인 합치기: Ctrl + Shift + J
@@ -31,7 +30,7 @@ comments: true # 댓글 유무 지정
     - Command + Shift + 방향키 위/아래(메소드 또는 구문 내에서만 이동 가능)
 - Element 단위로 옮기기(Html Tag의 속성 값 순서 변경): Command + Alt +Shift + 방향키 좌우
 
-### 디버깅 관련 단축키
+## 디버깅 관련 단축키
 - 디버그 모드로 실행하기
     - 현재 포커스가 있는 곳을 디버그 실행 : Ctrl + Shift + D
     - 상단 탭이 가리키는 곳을 디버그 실행 : Ctrl + D
@@ -45,6 +44,6 @@ comments: true # 댓글 유무 지정
 - Watch (브레이크 이후의 코드 변경 확인하기) : 안경 모양 버튼
 
 #### 출처
-- https://jojoldu.tistory.com/149
-- https://blog.jetbrains.com/ko/2020/03/11/top-15-intellij-idea-shortcuts_ko/
-- https://lalwr.blogspot.com/2018/04/intellij.html
+- [https://jojoldu.tistory.com/149](https://jojoldu.tistory.com/149)
+- [https://blog.jetbrains.com/ko/2020/03/11/top-15-intellij-idea-shortcuts_ko/](https://blog.jetbrains.com/ko/2020/03/11/top-15-intellij-idea-shortcuts_ko/)
+- [https://lalwr.blogspot.com/2018/04/intellij.html](https://lalwr.blogspot.com/2018/04/intellij.html)
