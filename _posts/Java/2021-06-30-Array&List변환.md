@@ -9,10 +9,9 @@ toc: true # Table Of Content(TOC) 옵션, 기본적으로 포스트의 오른쪽
 comments: true # 댓글 유무 지정
 ---
 
-# Array&List변환
+# 1) List -> Array 변환
+## case1 - 반복문 이용
 
-## List -> Array 변환
-### case1 - 반복문 이용
 ~~~
 ArrayList<String> arrayList = new ArrayList<>();
 
@@ -28,7 +27,8 @@ for(String temp : arrayList){
 }
 ~~~
 
-### case2 - List에서 제공하는 toArray메서드 이용
+## case2 - List에서 제공하는 toArray메서드 이용
+
 ~~~
 ArrayList<String> arrayList = new ArrayList<>();
 
@@ -39,8 +39,9 @@ arrayList.add("Test3");
 String[] array = arrayList.toArray(new String[arrayList.size()]);
 ~~~
 
-## Array -> List 변환
-### case1 - 반복문 이용
+# 2) Array -> List 변환
+## case1 - 반복문 이용
+
 ~~~
 String[] array = new String[3];
 
@@ -54,7 +55,8 @@ for(String temp : array){
 }
 ~~~
 
-### case2 - Arrays에서 제공하는 메서드 이용 (Arrays.asList())
+## case2 - Arrays에서 제공하는 메서드 이용 (Arrays.asList())
+
 ~~~
 String[] array = new String[3];
 
@@ -65,7 +67,8 @@ array[2] = "Test3";
 ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(array));
 ~~~
 
-## 테스트 코드
+### 테스트 코드
+
 ~~~
 import java.util.ArrayList;
 import java.util.List;
@@ -111,4 +114,4 @@ public class TestMain2 {
 ~~~
 
 #### 출처
-- https://mommoo.tistory.com/32
+- [https://mommoo.tistory.com/32](https://mommoo.tistory.com/32)
