@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "webrick"
+# gem "webrick"
 
 group :test do
   gem "html-proofer", "~> 3.18"
