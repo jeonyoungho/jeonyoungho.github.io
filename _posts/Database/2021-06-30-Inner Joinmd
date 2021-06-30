@@ -47,3 +47,19 @@ WHERE "buy".BUY_ID = 'buy3'
 - <b>customer테이블과 buy테이블은 모두 USER_ID 컬럼이 존재하기에 반드시 테이블명.컬럼명 형태로 작성해야 한다.(별칭도 가능) 그렇지 않을 경우 오류가 발생한다.</b>
 
 - 위의 결과를 생성하기 위해서 아래와 같은 과정을 거친다.
+
+~~~
+1. buy테이블의 'buy3' USER_ID를 추출해낸다.
+
+2. 'buy3'와 동일한 값을 customer에서 검색한다.
+
+3.'buy3'라는 USER_ID를 찾으면, buy테이블과 customer의 모든 칼럼을 결합(Join)한다.
+
+* 만약, 위 예제에서 where문이 빠져 있다면, 모든 구매기록에 대해 customer + buy 테이블의 결합이 발생하게 된다.
+~~~
+
+- <b>위의 예시를 토대로 INNER JOIN은 조인될 조건이 부합하는 행에 대해서만 Join이 발생하는 것임을 알 수 있다.<b>
+
+#### 출처
+- [http://egloos.zum.com/sweeper/v/3002133](http://egloos.zum.com/sweeper/v/3002133)
+- [https://dimdim.tistory.com/entry/SQL-JOIN-%EC%A0%95%EB%A6%AC-Inner-Join-Outer-Join](https://dimdim.tistory.com/entry/SQL-JOIN-%EC%A0%95%EB%A6%AC-Inner-Join-Outer-Join)
