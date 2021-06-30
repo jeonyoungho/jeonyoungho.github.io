@@ -10,4 +10,14 @@ comments: true # 댓글 유무 지정
 ---
 
 # Inner Join
-- Inner Join
+- Inner Join은 조인될 조건이 부합하는 행에 대해서만 Join이 발생하는 것(교집합의 영역)
+- 대개의 업무에서 조인은 Inner Join을 주로 사용하며, 일반적으로 Join이라 하면, Inner Join을 지칭하는 것이다.
+
+### Inner Join 구조
+~~~
+SELECT <열 목록>
+FROM <첫 번째 테이블>
+    Inner Join <두 번째 테이블>
+    ON <조인될 조건>
+[WHERE 검색조건]
+~~~
