@@ -13,7 +13,7 @@ comments: true # 댓글 유무 지정
 - Inner Join은 조인될 조건이 부합하는 행에 대해서만 Join이 발생하는 것(교집합의 영역)
 - 대개의 업무에서 조인은 Inner Join을 주로 사용하며, 일반적으로 Join이라 하면, Inner Join을 지칭하는 것이다.
 
-### Inner Join 구조
+#### Inner Join 구조
 ~~~
 SELECT <열 목록>
 FROM <첫 번째 테이블>
@@ -21,3 +21,8 @@ FROM <첫 번째 테이블>
     ON <조인될 조건>
 [WHERE 검색조건]
 ~~~
+
+# Inner Join 예시
+- 기본적인 이해를 돋기 위해 아래의 customer 테이블과 buy테이블 있다고 예시를 들어보자<br>
+<img width="720" alt="1" src="https://user-images.githubusercontent.com/44339530/121804534-cf8e7780-cc81-11eb-8b7d-cd7ffb7a6246.png"><br>
+<img width="721" alt="2" src="https://user-images.githubusercontent.com/44339530/121804537-d1f0d180-cc81-11eb-8672-10e3eb3a0072.png"><br>
