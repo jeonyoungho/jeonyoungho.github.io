@@ -9,10 +9,21 @@ comments: true # 댓글 유무 지정
 # pin: true # 홈페이지 메인화면에 특정 게시물 고정
 ---
 
+# Spring Security
+- spring security는 filter에 의해 구현됨(오고가는 request response를 가로채서 필터에서 거르는식으로 구현됨)<br>
+<img width="844" alt="screenshot" src="https://user-images.githubusercontent.com/44339530/76511174-1ea19780-6496-11ea-9139-20a63d65b16b.png"><br>
+
+## 1) filter패키지 및 filter 추가
+<img width="844" alt="screenshot" src="https://user-images.githubusercontent.com/44339530/76511284-50b2f980-6496-11ea-881c-7f0c2e2f5433.png"><br>
+
+
+
+## 4-2) web.xml에 ContextLoaderListener가 읽어들이도록 추가
+<img width="844" alt="4" src="https://user-images.githubusercontent.com/44339530/76516185-53195180-649e-11ea-951e-fae702562ce5.png"><br>
 
 ## 4-3) 메모리상에 유저의 정보 추가
 - password설정은 스프링4는 plain text형식이 상관이 없는데 5부터는 허용이 안된다. encoded text형식을 사용해야함
-- password에 `{id}`encodedPassword형식으로 어떤encode를 사용했는지의 id와 실제 password형식으로 넣어줘야함
+- password에 `{id}encodedPassword형식으로 어떤encode를 사용했는지의 id와 실제 password형식으로 넣어줘야함
 - encoding은 encryption(암호화)와 hashing(해쉬)방법이 있다.
 - `{noop}`는 암호화 되있지 않았음을 no operaion<br>
 <img width="844" alt="5" src="https://user-images.githubusercontent.com/44339530/76516187-544a7e80-649e-11ea-8e58-3aea08b229f9.png"><br>
