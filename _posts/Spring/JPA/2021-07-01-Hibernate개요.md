@@ -224,8 +224,8 @@ public class PersonService {
         // Session 얻어오기
         Session session = sessionFactory.getCurrentSession();
 
-        // session의 get메소드에 인자로 매핑 할 클래스와 id(primary key)값을 주고 호출해서 DB로부터 해당 레코드를 읽어와 객체로 넘겨주게됨 
-        Person person = (Person) session.get(Person.class, id);
+        // session의 get메소드에 인자로 매핑 할 클래스와 id(primary key)값을 주고 호출해서 DB로부터 해당 레코드를 읽어와 객체로 넘겨주게됨
+        Person person = (Person) session.get(Person.class, id);
         person.setFirstName(firstName);
         person.setLastName(lastName);
         person.setMoney(money); 
