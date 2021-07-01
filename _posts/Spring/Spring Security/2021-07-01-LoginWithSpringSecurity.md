@@ -28,7 +28,8 @@ comments: true # 댓글 유무 지정
 ## 4-1) security-contxt.xml 생성 후 namespace에서 security와 관련된거 추가
 <img width="844" alt="2" src="https://user-images.githubusercontent.com/44339530/76516179-501e6100-649e-11ea-98cf-a480ab6397bd.png"><br>
 
-
+- 에러 나는 경우가 있어서 spring공식 홈페이지에서 제공하는 namespace사용 추천<br>
+<img width="844" alt="3" src="https://user-images.githubusercontent.com/44339530/76516182-5280bb00-649e-11ea-9ecf-9e716b23c30d.png"><br>
 
 ## 4-2) web.xml에 ContextLoaderListener가 읽어들이도록 추가
 <img width="844" alt="4" src="https://user-images.githubusercontent.com/44339530/76516185-53195180-649e-11ea-951e-fae702562ce5.png"><br>
