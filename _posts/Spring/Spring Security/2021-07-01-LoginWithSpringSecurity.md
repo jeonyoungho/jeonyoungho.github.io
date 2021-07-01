@@ -28,7 +28,7 @@ comments: true # 댓글 유무 지정
 ## 4-1.security-contxt.xml 생성 후 namespace에서 security와 관련된거 추가
 <img width="844" alt="2" src="https://user-images.githubusercontent.com/44339530/76516179-501e6100-649e-11ea-98cf-a480ab6397bd.png"><br>
 
-- `※ 에러 나는 경우가 있어서 spring공식 홈페이지에서 제공하는 namespace사용 추천`<br>
+- `에러 나는 경우가 있어서 spring공식 홈페이지에서 제공하는 namespace사용 추천`<br>
 <img width="844" alt="3" src="https://user-images.githubusercontent.com/44339530/76516182-5280bb00-649e-11ea-9ecf-9e716b23c30d.png"><br>
 
 ## 4-2) web.xml에 ContextLoaderListener가 읽어들이도록 추가
@@ -38,7 +38,7 @@ comments: true # 댓글 유무 지정
 - password설정은 스프링4는 plain text형식이 상관이 없는데 5부터는 허용이 안된다. encoded text형식을 사용해야함
 - password에 {id}encodedPassword형식으로 어떤encode를 사용했는지의 id와 실제 password형식으로 넣어줘야함
 - encoding은 encryption(암호화)와 hashing(해쉬)방법이 있다.
-- {noop}는 암호화 되있지 않았음을 no operaion<br>
+- `{noop}`는 암호화 되있지 않았음을 no operaion<br>
 <img width="844" alt="5" src="https://user-images.githubusercontent.com/44339530/76516187-544a7e80-649e-11ea-8e58-3aea08b229f9.png"><br>
 
 ## 4-4) 유저의 권한 추가
@@ -54,7 +54,7 @@ comments: true # 댓글 유무 지정
 - data-source-ref -> DB연동이므로 datasource를 지정해줘야함
 - users-by-username-query -> 유저 이름을 스프링이 파악하기 위해 sql문 지정
 - authorities-by-username-query -> 그 유저에 대한 권한을 스프링이 파악하기 위해 sql문지정<br>
-<img width="844" alt="7-" src="https://user-images.githubusercontent.com/44339530/76516192-54e31500-649e-11ea-8456-8a0b570c7530.png"><br>
+<img width="844" alt="7" src="https://user-images.githubusercontent.com/44339530/76516192-54e31500-649e-11ea-8456-8a0b570c7530.png"><br>
 
 ## 6) DB Table 생성 및 레코드 삽입
 <img width="844" alt="8" src="https://user-images.githubusercontent.com/44339530/76516194-557bab80-649e-11ea-966e-ff61e5eb0c00.png"><br>
