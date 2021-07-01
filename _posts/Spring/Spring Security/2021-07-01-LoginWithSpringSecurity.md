@@ -9,13 +9,14 @@ comments: true # 댓글 유무 지정
 # pin: true # 홈페이지 메인화면에 특정 게시물 고정
 ---
 
+# Spring Security
+- spring security는 filter에 의해 구현됨(오고가는 request response를 가로채서 필터에서 거르는식으로 구현됨)<br>
+<img width="844" alt="screenshot" src="https://user-images.githubusercontent.com/44339530/76511174-1ea19780-6496-11ea-9139-20a63d65b16b.png"><br>
 
-## 2) 관련 라이브러리 추가
-- config, web, core<br>
-<img width="844" alt="screenshot" src="https://user-images.githubusercontent.com/44339530/76511084-f5810700-6495-11ea-9c31-bbc18ea055da.png"><br>
+## 1) filter패키지 및 filter 추가
+<img width="844" alt="screenshot" src="https://user-images.githubusercontent.com/44339530/76511284-50b2f980-6496-11ea-881c-7f0c2e2f5433.png"><br>
 
-## 3) web.xml에 springSecurityFilterChain 등록
-<img width="844" alt="1" src="https://user-images.githubusercontent.com/44339530/76516166-4c8ada00-649e-11ea-8542-b14739b072ac.png"><br>
+
 
 ## 4) web.xml에 명시했던 springSecurityFilterChain이 request를 가로채서 권한이 없는지 없는지 체크하는데 이를 위해 Autentication(인증)과 Authorization(권한)을 명시
 
