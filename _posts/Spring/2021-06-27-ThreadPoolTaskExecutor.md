@@ -34,6 +34,7 @@ public TaskExecutor taskExecutor() {
 - <b>내부적으로는 Integer.MAX_VALUE사이즈의 LinkedBlockingQueue를 생성해서 core사이즈만큼의 스레드에서 task를 처리할 수 없을 경우 queue에서 대기하게 됩니다. queue가 꽉 차게 되면 그때 max 사이즈만큼 스레드를 생성해서 처리하게 된다.</b>
 
 ### Capacity configuration
+
 ~~~
 @Bean("simpleTaskExecutor")
 public TaskExecutor taskExecutor() {
@@ -44,6 +45,7 @@ public TaskExecutor taskExecutor() {
     return taskExecutor;
 }
 ~~~
+
 - core 사이즈 보다 많은 요청이 발생할 경우 Integer.MAX_VALUE 사이즈만큼의 queue의 용량이 너무 크다고 생각된다면 queueCapacity사이즈를 변경할 수 있다.
 - 위의 예시 코드와 같이 설정한다면 최초 5개의 스레드에서 처리하다가 처리 속도가 밀릴 경우 100개 사이즈 queue에서 대기하고 그보다 많은 요청이 들어올 경우 최대 10개의 스레드까지 생성해서 처리하게 된다.
 
