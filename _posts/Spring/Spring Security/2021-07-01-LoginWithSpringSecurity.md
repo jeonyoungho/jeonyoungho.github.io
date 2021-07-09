@@ -23,7 +23,7 @@ comments: true # 댓글 유무 지정
 #### 3) web.xml에 springSecurityFilterChain 등록
 <img width="844" alt="1" src="https://user-images.githubusercontent.com/44339530/76516166-4c8ada00-649e-11ea-8542-b14739b072ac.png"><br>
 
-#### 4) web.xml에 명시했던 springSecurityFilterChain이 request를 가로채서 권한이 없는지 없는지 체크하는데 이를 위해 Autentication(인증)과 Authorization(권한)을 명시
+#### 4) web.xml에 명시했던 springSecurityFilterChain이 request를 가로채서 권한이 있는지 없는지 체크하는데 이를 위해 Autentication(인증)과 Authorization(권한)을 명시
 
 #### 4-1) security-contxt.xml 생성 후 namespace에서 security와 관련된거 추가
 <img width="844" alt="2" src="https://user-images.githubusercontent.com/44339530/76516179-501e6100-649e-11ea-98cf-a480ab6397bd.png"><br>
