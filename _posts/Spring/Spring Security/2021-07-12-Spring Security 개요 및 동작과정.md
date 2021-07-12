@@ -15,6 +15,11 @@ comments: true #### 댓글 유무 지정
 - Spring은 매우 막강한 인증과 인가 권한을 가진 프레임워크이다.
 - Spring Security는 Filter 기반으로 동작한다.
 
+![2](https://user-images.githubusercontent.com/44339530/125277665-b0e8d280-e34c-11eb-8824-49f194546c71.jpeg)<br>
+
+- Spring Security는 상당히 많은 Filter들을 기반으로 Filter체인을 구성한다.
+![3](https://user-images.githubusercontent.com/44339530/125278152-53a15100-e34d-11eb-98a2-0e8734674451.jpeg)<br>
+
 ## Filter기반이 아닌 Interceptor로는 불가능한가?
 - 먼저 Filter와 Interceptor의 차이점으로는 작동 위치가 다르다.
     - Filter는 DispatcherServlet 앞 단에서 작동하고 Interceptor는 DistpatcherServlet와 Controller 사이에서 작동한다.
@@ -26,6 +31,18 @@ comments: true #### 댓글 유무 지정
 - <b>Filter 기반 방식이 더 적절하다고 볼 수 있다.</b>
 - Filter기반으로 구현되면 스프링 웹플로우도 방어 가능하고, 스프링과 연동된 struts와 같은 관련 프로젝트도 동시에 방어 할 수 있다.
 - 또한, 최대한 Spring 내부의 로직과 엮이는 것을 방지하여 더 효과적으로 스프링 프로젝트를 관리할 수 있는 측면도 있다.
+
+# Spring Security의 특징
+1) 서블릿 API 통합<br>
+
+2) Spring Web MVC와의 선택적 통합<br>
+
+3) 인증과 구너한 부여를 모두 포괄적이고 확장 가능한 지원<br>
+
+4) 세션 고정, clickjacking, 사이트간 요청 위조 등과 같은 공격으로부터 보호<br>
+- 세션 고정: 사용자 로그인 시 항상 일정하게 고정된 세션 ID값을 사용하는 취약점
+- Clickjacking: 사용자가 클릭하고 있다고 인지하는 것과 다른 어떤 것을 클릭하게 속이는 악의적인 기법
+- 사이트간 요청 위조: csrf라 부르며, 사용자가 자신의 의지와는 무관하게 공격자가 의도한 행위를 특정 웹 사이트에 요청하게 하는 악의적인 기법
 
 # Spring Security 동작 과정 
 ![1](https://user-images.githubusercontent.com/44339530/125274415-e986ad00-e348-11eb-90f7-d53485de0495.png)<br>
@@ -47,3 +64,4 @@ comments: true #### 댓글 유무 지정
 #### 출처
 - [https://mangkyu.tistory.com/77](https://mangkyu.tistory.com/77)
 - [https://sungminhong.github.io/spring/security/](https://sungminhong.github.io/spring/security/)
+- [https://www.youtube.com/watch?v=aEk-7RjBKwQ](https://www.youtube.com/watch?v=aEk-7RjBKwQ)
