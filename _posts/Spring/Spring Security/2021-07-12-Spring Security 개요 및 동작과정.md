@@ -22,7 +22,7 @@ comments: true #### 댓글 유무 지정
 
 ## Filter기반이 아닌 Interceptor로는 불가능한가?
 - 먼저 Filter와 Interceptor의 차이점으로는 작동 위치가 다르다.
-    - Filter는 DispatcherServlet 앞 단에서 작동하고 Interceptor는 DistpatcherServlet와 Controller 사이에서 작동한다.
+    - Filter는 DispatcherServlet 앞 단에서 작동하고 Interceptor는 DistpatcherServlet과 Controller 사이에서 작동한다.
 
 - Interceptor로도 Controller로 오는 Request에 대해 인증 및 인가를 구현할 수 있다.
 - 하지만 Spring Security는 애초에 Spring과 관련없이 독립적으로 활동하던 프로젝트였으며 단순하게 서블릿을 방어하기 위한 목적이였기에 필터 기반으로 구현되어 있다.
@@ -37,7 +37,7 @@ comments: true #### 댓글 유무 지정
 
 2) Spring Web MVC와의 선택적 통합<br>
 
-3) 인증과 구너한 부여를 모두 포괄적이고 확장 가능한 지원<br>
+3) 인증과 권한 부여를 모두 포괄적이고 확장 가능한 지원<br>
 
 4) 세션 고정, clickjacking, 사이트간 요청 위조 등과 같은 공격으로부터 보호<br>
 - 세션 고정: 사용자 로그인 시 항상 일정하게 고정된 세션 ID값을 사용하는 취약점
