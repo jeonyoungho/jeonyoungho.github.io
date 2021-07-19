@@ -50,7 +50,7 @@ StringBuffer와 StringBuilder의 가장 큰 차이점은 `동기화의 유무`�
 - StringBuilder: 문자열 연산이 많고 단일쓰레드이거나 동기화를 고려하지 않아도 되는 경우
 
 ![3](https://user-images.githubusercontent.com/44339530/126058408-363e7adc-32b6-4ad2-a747-d1867d65416b.png)
-_출처 - [tuandevnotes.com](https://tuandevnotes.com/)_
+_출처 - [tuandevnotes.com](https://tuandevnotes.com)_
 
 #### 출처
 - [https://ifuwanna.tistory.com/221](https://ifuwanna.tistory.com/221)
