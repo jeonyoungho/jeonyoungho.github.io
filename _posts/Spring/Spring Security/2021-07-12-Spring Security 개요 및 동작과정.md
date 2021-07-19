@@ -30,7 +30,7 @@ comments: true #### 댓글 유무 지정
 ## 그럼 Filter기반 인증 방식과 Interceptor기반 인증 방식과 무엇이 더 적절할까?
 - <b>Filter 기반 방식이 더 적절하다고 볼 수 있다.</b>
 - Filter기반으로 구현되면 스프링 웹플로우도 방어 가능하고, 스프링과 연동된 struts와 같은 관련 프로젝트도 동시에 방어 할 수 있다.
-- 또한, 최대한 Spring 내부의 로직과 엮이는 것을 방지하여 더 효과적으로 스프링 프로젝트를 관리할 수 있는 측면도 있다.
+- 또한, 최대한 Spring 내부의 로직과 엮이는 것을 방지하여 더 효율적으로 스프링 프로젝트를 관리할 수 있는 측면도 있다.
 
 # Spring Security의 특징
 1) 서블릿 API 통합<br>
@@ -55,7 +55,7 @@ comments: true #### 댓글 유무 지정
 
 4) AuthenticationProvider는 UserDetailsService를 통해 입력받은 아이디에 대한 사용자 정보를 DB에서 조회함<br>
 
-5) 입력받은 비밀번호를 암호화하여 DB의 비밀번호화 매칭시켜 일치하는 경우 인증된 UsernamePasswordAuthenticationToken을 생성하여 AuthenticationManager에 전달함<br>
+5) 입력받은 비밀번호를 암호화하여 DB의 비밀번호와 매칭시켜 일치하는 경우 인증된 UsernamePasswordAuthenticationToken을 생성하여 AuthenticationManager에 전달함<br>
 
 6) AuthenticationManager는 UsernameAuthenticationToken을 AuthenticationFilter로 전달함<br>
 
