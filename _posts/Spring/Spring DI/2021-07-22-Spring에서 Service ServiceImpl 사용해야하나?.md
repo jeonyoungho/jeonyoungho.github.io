@@ -9,7 +9,7 @@ comments: true # 댓글 유무 지정
 # pin: true # 홈페이지 메인화면에 특정 게시물 고정
 ---
 
-Spring 코드를 보면 Service인터페이스를 두고 ServiceImpl로 이를 구현하는 경우를 자주 볼 수 있다. 이 전에 정리했던 ['스프링 의존성 주입과 인터페이스'](https://jeonyoungho.github.io/posts/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%9D%98%EC%A1%B4%EC%84%B1-%EC%A3%BC%EC%9E%85%EA%B3%BC-%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4/)에 이어 다시 한 번 더 정리를 하고 싶어졌다.
+스프링 코드를 보면 Service인터페이스를 두고 ServiceImpl로 이를 구현하는 경우를 자주 볼 수 있다. 이 전에 정리했던 ['스프링 의존성 주입과 인터페이스'](https://jeonyoungho.github.io/posts/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%9D%98%EC%A1%B4%EC%84%B1-%EC%A3%BC%EC%9E%85%EA%B3%BC-%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4/)에 이어 다시 한 번 더 정리를 하고 싶어졌다.
 
 # Service인터페이스 ServiceImpl로 나누는 이유
 <b>1) Loose Coupling</b>
