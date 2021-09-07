@@ -1,5 +1,5 @@
 ---
-title: "[개발자 블로그] Javascript 관련 새로 배운 내용" # post의 layout이 기본적으로 post로 설정되어있어서 Front Matter에 따로 layout변수를 만들어 주지 않아도 됨
+title: "[개발자 블로그] PoiemaWeb - javascript" # post의 layout이 기본적으로 post로 설정되어있어서 Front Matter에 따로 layout변수를 만들어 주지 않아도 됨
 date: 2021-09-03 +0800
 categories: [Frontend, Javascript] # categories는 최대 2개까지 가능
 tags: [javascript, ES6] # TAG는 반드시 소문자로 이루어져야함, 0~무한개까지 지정 가능
@@ -42,17 +42,6 @@ str[0] = 'S'
 
 위의 코드 처럼 이미 생성된 문자열의 일부 문자를 변경해도 반영되지 않는다(이때 에러가 발생하지 않는다). 한 번 생성된 문자열은 read only로서 변경할 수 없다.(immutable)
 (Java의 String과 같다고 생각하면 된다.)
-
----
-title: "[개발자 블로그] Javascript 관련 TIP" # post의 layout이 기본적으로 post로 설정되어있어서 Front Matter에 따로 layout변수를 만들어 주지 않아도 됨
-date: 2021-09-03 +0800
-categories: [Frontend, Basic] # categories는 최대 2개까지 가능
-tags: [javascript, ES6] # TAG는 반드시 소문자로 이루어져야함, 0~무한개까지 지정 가능
-toc: true # Table Of Content(TOC) 옵션, 기본적으로 포스트의 오른쪽 패널에 위치
-comments: true # 댓글 유무 지정
-# image: /assets/img/test.png # Preview image
-# pin: true # 홈페이지 메인화면에 특정 게시물 고정
----
 
 # 2021년 9월 3일
 1) 브라우저 동작 원리
@@ -127,7 +116,7 @@ console.log(obj[key]); // value
 - '===(일치 비교)': 두 변수의 타입과 값이 일치하는지 비교
 
 References
-- https://velog.io/@filoscoder/-%EC%99%80-%EC%9D%98-%EC%B0%A8%EC%9D%B4-oak1091tes
+- [https://velog.io/@filoscoder/-%EC%99%80-%EC%9D%98-%EC%B0%A8%EC%9D%B4-oak1091tes](https://velog.io/@filoscoder/-%EC%99%80-%EC%9D%98-%EC%B0%A8%EC%9D%B4-oak1091tes)
 
 일치 비교 연산자에서 주의할 것은 NaN이다.
 
@@ -136,9 +125,26 @@ NaN === NaN // false
 ~~~
 
 NaN은 자신과 일치하지 않는 유일한 값이다. 따라서 숫자가 NaN인지 조사하려면 비트인 함수 isNaN을 사용한다.
+왜 NaN == NaN이 false가 나오는 이유는 아래의 코드를 통해 쉽게 이해할 수 있다.
+
+~~~
+function foo(a, b) {
+  return a / 5 === b * 20;
+}
+
+foo('good', 'test');
+~~~
+
+foo함수의 return문을 해석하면 NaN == NaN이 될 것이다. 이 결과는 true라고 볼 수 없다. 둘 다 숫자가 아님을 뜻할 뿐이지 같은 값이라고는 볼 수 없다. 그러기에 false로 나온다고 이해하면 된다. NaN을 체크하려면 아래와 같이 내장함수인 isNaN을 사용하면 된다.
 
 ~~~
 isNaN(NaN);
+~~~
+
+NaN의 number의 type중 하나이다. number로 해석하려다 해석이 불가능한 값을 NaN이라 볼 수 있다. 예를 들어, 아래와 같은 코드를 예시로 볼 수 있다. 'alice'라는 문자열을 number로 변환하려 하지만 해석이 불가능하기에 결과는 NaN이 출력된다.
+
+~~~
+console.log(parseInt('alice')); 
 ~~~
 
 7) var 키워드로 선언한 변수는 중복 선언이 가능하다. 다시 말해 변수명이 같은 변수를 중복해 선언해도 에러가 발생하지 않는다. (이전 변수의 값을 덮어쓴다)  만약 동일한 변수명이 선언되어 있는 것을 모르고 변수를 중복 선언했다면 의도치 않게 변수의 값을 변경하는 부작용을 발생시킨다. 따라서 변수의 중복 선언은 문법적으로 허용되지만 사용하지 않는 것이 좋다.
@@ -482,7 +488,9 @@ for (const [index, value] of array.entries()) {
 
 ※ for–in 문은 객체의 프로퍼티를 순회하기 위해 사용하고 for–of 문은 배열의 요소를 순회하기 위해 사용한다.
 
-25) [Pass-by-reference](https://poiemaweb.com/js-object#4-pass-by-reference)
+25) 자바스크립의 함수 호출 시 인자 전달 방식은 자바와 동일하다고 생각하면 된다. (call by value)
+- primitive타입의 경우에는 메모리에 있는 값을 복사하여 전달하기에 원본 값은 영향을 받지 않는다.
+- 객체(참조)타입의 경우에는 메모리의 주소 값을 가지고 있는 레퍼런스를 복사하여 전달하기에 원본에 영향을 받게 된다.
 
 26) 단순 복사, 얕은 복사(shallow copy), 깊은 복사(deep copy)
 - 단순 복사: 완전히 동일한 객체(mutable한 경우에는 pass-by-reference로 값이 수정될 수 있지만, immutable한 경우에는 pass-by-value로 값이 수정되는 것이 아닌 아예 새로운 객체로 변경됨)
@@ -550,6 +558,61 @@ flag 값에 따라 1 또는 2를 도출해내서 더하는 목적으로 사용�
 ~~~
 flag ? console.log('1') : console.log('2');
 ~~~
+
+# 2021년 9월 7일
+
+## [1. 프로토타입 객체](https://poiemaweb.com/js-prototype#1-%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85-%EA%B0%9D%EC%B2%B4)
+자바스크립트의 모든 객체는 자신의 부모 역할을 담당하는 객체와 연결되어 있다. 그리고 이것은 마치 객체 지향의 상속 개념과 같이 부모 객체의 프로퍼티 또는 메소드를 상속받아 사용할 수 있게 한다. 이러한 부모 객체를 `Prototype(프로토타입) 객체` 또는 줄여서 Prototype(프로토타입)이라 한다.
+
+객체를 생성할 때 프로토타입은 결정된다. 결정된 프로토타입 객체는 다른 임의의 객체로 변경할 수 있다. 이것은 부모 객체인 프로토타입을 동적으로 변경할 수 있다는 것을 의미한다. 이러한 특징을 활용하여 객체의 상속을 구현할 수 있다.
+## [3. constructor 프로퍼티](https://poiemaweb.com/js-prototype#3-constructor-%ED%94%84%EB%A1%9C%ED%8D%BC%ED%8B%B0)
+프로토타입 객체는 constructor 프로퍼티를 갖는다. 이 constructor 프로퍼티는 객체의 입장에서 자신을 생성한 객체를 가리킨다.
+
+예를 들어 Person()생성자 함수에 의해 생성된 객체를 foo라 하자. 이 foo 객체를 생성한 객체는 Person() 생성자 함수이다. 이때 foo 객체 입장에서 자신을 생성한 객체는 Person() 생성자 함수이며, foo객체의 프로토타입 객체는 Person.protytype이다. 따라서 프로토타입 객체 Person.protytype의 constructor프로퍼티는 Person()생성자 함수를 가리킨다.
+
+## [4. Prototype chain](https://poiemaweb.com/js-prototype#4-prototype-chain)
+자바스크립트는 특정 객체의 프로퍼티나 메소드에 접근하려고 할 때 해당 객체에 접근하려는 프로퍼티 또는 메소드가 없다면 [[Protytype]]이 가리키는 링크를 따라 자신의 부모 역할을 하는 프로토타입 객체의 프로퍼티나 메소드를 차례대로 검색한다. 이것을 `프로토타입 체인`이라 한다.
+
+~~~
+var student = {
+  name: 'Lee',
+  score: 90
+}
+
+// Object.prototype.hasOwnProperty()
+console.log(student.hasOwnProperty('name')); // true
+~~~
+
+student 객체는 hasOwnProperty 메소드를 가지고 있지 않으므로 에러가 발생하여야 하나 정상적으로 결과가 출력되었다. 이는 student 객체의 [[Prototype]]이 가리키는 링크를 따라가서 student 객체의 부모 역할을 하는 프로토타입 객체(Object.protytype)의 메소드 hasOwnProperty를 호출하였기 때문에 가능한 것이다.
+
+## [4.2 생성자 함수로 생성된 객체의 프로토타입 체인](https://poiemaweb.com/js-prototype#42-%EC%83%9D%EC%84%B1%EC%9E%90-%ED%95%A8%EC%88%98%EB%A1%9C-%EC%83%9D%EC%84%B1%EB%90%9C-%EA%B0%9D%EC%B2%B4%EC%9D%98-%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85-%EC%B2%B4%EC%9D%B8)
+
+~~~
+function Person(name, gender) {
+  this.name = name;
+  this.gender = gender;
+  this.sayHello = function(){
+    console.log('Hi! my name is ' + this.name);
+  };
+}
+
+var foo = new Person('Lee', 'male');
+
+console.dir(Person);
+console.dir(foo);
+
+console.log(foo.__proto__ === Person.prototype);                // ① true
+console.log(Person.prototype.__proto__ === Object.prototype);   // ② true
+console.log(Person.prototype.constructor === Person);           // ③ true
+console.log(Person.__proto__ === Function.prototype);           // ④ true
+console.log(Function.prototype.__proto__ === Object.prototype); // ⑤ true
+~~~
+
+![image](https://user-images.githubusercontent.com/44339530/132288173-b752be84-3727-478e-9aca-09d5b22daa11.png)
+
+foo 객체의 프로토타입 객체인 Person.protytype 객체와 Person() 생성자 함수의 프로토타입 객체인 Function.protytype의 프로토타입 객체는 Object.protytype 객체이다.
+
+이는 객체 리터럴 방식이나 생성자 함수 방식이나 결국은 모든 객체의 부모 객체인 Object.protytype 객체에서 프로토타입 체인이 끝나기 때문이다. 이때 Object.protytype 객체를 <b>프로토타입 체인의 종점(End of protytype chain)</b>이라 한다.
 
 #### 출처
 - [https://poiemaweb.com/](https://poiemaweb.com/)
