@@ -9,10 +9,5 @@ comments: true # 댓글 유무 지정
 # pin: true # 홈페이지 메인화면에 특정 게시물 고정
 ---
 
-innerText와 innerHTML은 단순한 텍스트만 다룰 경우에는 차이가 없어 보인다.
-이 두 속성은 다루는 값이 text element인지, html element인지에 따라 차이가 난다.
-
-# 값 가져오기 (innerText vs innerHTML)
-
 #### 출처
 - [https://0xd00d00.github.io/2021/07/06/embedCodepen.html](https://0xd00d00.github.io/2021/07/06/embedCodepen.html)
