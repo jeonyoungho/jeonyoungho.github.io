@@ -14,5 +14,19 @@ innerText와 innerHTML은 단순한 텍스트만 다룰 경우에는 차이가 �
 
 # 값 가져오기 (innerText vs innerHTML)
 
+## element.innerText;
+element 안의 text 값들만을 가져옵니다.
+
+## element.innerHTML;
+innerText와는 달리 innerHTML은 element 안의 HTML이나 XML을 가져옵니다.
+
+# 값 설정하기 (innerText vs innerHTML)
+
+## element.innerText = "<div style='color:red'>A</div>";
+element.innerText에 html을 포함한 문자열을 입력하면, html코드가 문자열 그대로 element안에 포함됩니다.
+
+## element.innerHTML = "<div style='color:red'>A</div>";
+element.innerHTML 속성에 html코드를 입력하면, html element가 element안에 포함되게 됩니다.
+
 #### 출처
 - [어제 오늘 내일](https://hianna.tistory.com/480)
