@@ -63,6 +63,8 @@ disqus:
   comments: true # boolean type, the global switch for posts comments.
   shortname: "youngho-devlog" # Fill with your Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
 
+codepen_username: jeonyoungho # codepen id
+
 # Prefer color scheme setting.
 #
 # Note: Keep empty will follow the system prefer color by default,
