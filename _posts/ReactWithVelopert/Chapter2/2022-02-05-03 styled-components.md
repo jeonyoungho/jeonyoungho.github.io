@@ -359,7 +359,7 @@ App.js 를 다음과 같이 수정해보자.
 
 - App.js
 
-```jsx
+```javascript
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import Button from './components/Button';
@@ -375,13 +375,13 @@ const AppBlock = styled.div`
 function App() {
   return (
     <ThemeProvider
-      theme={{
+      theme={% raw %}{{
         palette: {
           blue: '#228be6',
           gray: '#495057',
           pink: '#f06595'
         }
-      }}
+      }}{% endraw %}
     >
       <AppBlock>
         <Button>BUTTON</Button>
@@ -523,13 +523,13 @@ const AppBlock = styled.div`
 function App() {
   return (
     <ThemeProvider
-      theme={{
+      theme={% raw %}{{
         palette: {
           blue: '#228be6',
           gray: '#495057',
           pink: '#f06595'
         }
-      }}
+      }}{% endraw %}
     >
       <AppBlock>
         <Button>BUTTON</Button>
@@ -781,13 +781,13 @@ const ButtonGroup = styled.div`
 function App() {
   return (
     <ThemeProvider
-      theme={{
+      theme={% raw %}{{
         palette: {
           blue: '#228be6',
           gray: '#495057',
           pink: '#f06595'
         }
-      }}
+      }}{% endraw %}
     >
       <AppBlock>
         <ButtonGroup>
@@ -1038,13 +1038,13 @@ const ButtonGroup = styled.div`
 function App() {
   return (
     <ThemeProvider
-      theme={{
+      theme={% raw %}{{
         palette: {
           blue: '#228be6',
           gray: '#495057',
           pink: '#f06595'
         }
-      }}
+      }}{% endraw %}
     >
       <AppBlock>
         <ButtonGroup>
@@ -1233,13 +1233,13 @@ const ButtonGroup = styled.div`
 function App() {
   return (
     <ThemeProvider
-      theme={{
+      theme={% raw %}{{
         palette: {
           blue: '#228be6',
           gray: '#495057',
           pink: '#f06595'
         }
-      }}
+      }}{% endraw %}
     >
       <AppBlock>
         <ButtonGroup>
@@ -1416,13 +1416,13 @@ const ButtonGroup = styled.div`
 function App() {
   return (
     <ThemeProvider
-      theme={{
+      theme={% raw %}{{
         palette: {
           blue: '#228be6',
           gray: '#495057',
           pink: '#f06595'
         }
-      }}
+      }}{% endraw %}
     >
       <>
         <AppBlock>
@@ -1708,13 +1708,13 @@ function App() {
 
   return (
     <ThemeProvider
-      theme={{
+      theme={% raw %}{{
         palette: {
           blue: '#228be6',
           gray: '#495057',
           pink: '#f06595'
         }
-      }}
+      }}{% endraw %}
     >
       <>
         <AppBlock>
