@@ -359,7 +359,7 @@ App.js 를 다음과 같이 수정해보자.
 
 - App.js
 
-```javascript
+```jsx
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import Button from './components/Button';
