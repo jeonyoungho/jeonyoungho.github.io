@@ -12,3 +12,18 @@ comments: true # 댓글 유무 지정
 본 포스팅은 [벨로퍼트와 함께하는 모던 리액트](https://react.vlpt.us/)를 학습 후 정리하는 목적으로 작성하는 포스팅입니다.
 
 # 02. CSS Module
+이번에는 CSS Module 이라는 기술에 대해서 알아보자. 리액트 프로젝트에서 컴포넌트를 스타일링 할 때 CSS Module 이라는 기술을 사용하면, CSS 클래스가 중첩되는 것을 완벽히 방지할 수 있다.
+
+CRA 로 만든 프로젝트에서 CSS Module 를 사용 할 때에는, CSS 파일의 확장자를 .module.css 로 하면 되는데, 예를 들어서 다음과 같이 Box.module.css 라는 파일을 만들게 된다면
+
+- Box.module.css
+
+```css
+.Box {
+  background: black;
+  color: white;
+  padding: 2rem;
+}
+```
+
+리액트 컴포넌트 파일에서 해당 CSS 파일을 불러올 때 CSS 파일에 선언한 클래스 이름들이 모두 고유해진다. 고유 CSS 클래스 이름이 만들어지는 과정에서는 파일 경로, 파일 이름, 클래스 이름, 해쉬값 등이 사용 될 수 있다.
