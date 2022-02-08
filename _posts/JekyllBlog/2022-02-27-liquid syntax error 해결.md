@@ -24,5 +24,5 @@ Jekyll에서 사용되는 liquid는 {% raw %}`{{`와 `}}`{% endraw %} 를 escape
 
 #### 출처
 - [https://iamheesoo.github.io/blog/gitblog-sol-jekyll02](https://iamheesoo.github.io/blog/gitblog-sol-jekyll02)
-- [https://dongsik93.github.io/til/2019/12/03/til-jekyll-liquid-warning/]
-- [https://jmjeong.com/escape-in-liquid-syntax/]
+- [https://dongsik93.github.io/til/2019/12/03/til-jekyll-liquid-warning/](https://dongsik93.github.io/til/2019/12/03/til-jekyll-liquid-warning/)
+- [https://jmjeong.com/escape-in-liquid-syntax/](https://jmjeong.com/escape-in-liquid-syntax/)
