@@ -29,6 +29,8 @@ devtool 속성을 추가하고 소스 맵 설정 옵션 중 하나를 선택해 
 # 소스 맵 설정 옵션
 위에서 정의한 소스 맵 설정 옵션 이외에도 많은 옵션들이 있다. 자세한 옵션 속성과 비교는 다음 [링크](https://webpack.js.org/configuration/devtool/#devtool)로 확인하자.
 
+> **Note**: 공식 문서를 읽는 것말고 빠르게 이해하고 싶다면 [여기](https://fgh0296.tistory.com/20?category=480995)를 참고하자.
+
 # 소스 맵은 어떻게 동작할까?
 webpack 을 통해서 번들링된 bundle.js 파일 끝에 보면 아래와 같은 주석이 있음을 확인할 수 있다.
 
