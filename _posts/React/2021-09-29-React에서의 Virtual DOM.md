@@ -9,5 +9,15 @@ comments: true # 댓글 유무 지정
 # pin: true # 홈페이지 메인화면에 특정 게시물 고정
 ---
 
+# virutal dom 을 알아보기에 앞서 dom이란 무엇인가?
+- `Document Object Model` 의 약자
+- 객체로 문서 구조를 표현하는 방법(html 파일로부터 브라우저 화면을 표현하는 방법)
+- 트리 형태로 구성되며 javascript로 특정 노드의 CRUD 작업이 가능
+
+
 #### 출처
 - [https://brunch.co.kr/@eight-two-five/14](https://brunch.co.kr/@eight-two-five/14)
+- [https://velog.io/@gwak2837/React-Virtual-DOM-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0](https://velog.io/@gwak2837/React-Virtual-DOM-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0)
+- [https://ko.reactjs.org/docs/faq-internals.html](https://ko.reactjs.org/docs/faq-internals.html)
+- [https://dev-cini.tistory.com/10](https://dev-cini.tistory.com/10)
+- [https://dev-cini.tistory.com/11](https://dev-cini.tistory.com/11)
