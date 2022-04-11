@@ -36,7 +36,8 @@ DOM의 변화가 변화가 일어나면 다음과 같은 과정들이 일어나�
 # 그럼 어떻게 virtual dom으로 DOM 조작을 최소한으로 할까?
 각 컴포넌트가 반환하는 엘리먼트를 이전에 반환했던 엘리먼트와 비교하고(`Reconcilation`), 다른 경우에만 해당하는 DOM 노드에 CRUD 작업을 수행한다.
 
-![1_8OCCATi8_5HmWI1QpjrRNA](https://user-images.githubusercontent.com/44339530/162747136-fc5c387b-2185-4bd2-b21e-9b6e62c4707a.png)
+![1_8OCCATi8_5HmWI1QpjrRNA](https://user-images.githubusercontent.com/44339530/162753053-c0b10645-ccc8-4d8b-ad25-e3b9dcaab165.png)
+
 _출처: https://blog.bitsrc.io/incremental-vs-virtual-dom-eb7157e43dca_
 
 위에서 설명했던 것처럼 기본적으로 `virtual dom`은 실제 DOM과 동일한 상태를 가지고 있으며, 표현하는 형식만 다르다.
