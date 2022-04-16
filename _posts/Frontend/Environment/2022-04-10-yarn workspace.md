@@ -2,18 +2,16 @@
 title: "yarn workspace" # post의 layout이 기본적으로 post로 설정되어있어서 Front Matter에 따로 layout변수를 만들어 주지 않아도 됨
 date: 2022-04-10 +0800
 categories: [Frontend, Environment] # categories는 최대 2개까지 가능
-tags: [yarn, monorepo] # TAG는 반드시 소문자로 이루어져야함, 0~무한개까지 지정 가능
+tags: [yarn, workspace] # TAG는 반드시 소문자로 이루어져야함, 0~무한개까지 지정 가능
 toc: true # Table Of Content(TOC) 옵션, 기본적으로 포스트의 오른쪽 패널에 위치
 comments: true # 댓글 유무 지정
 # image: /assets/img/test.png # Preview image
 # pin: true # 홈페이지 메인화면에 특정 게시물 고정
 ---
 
-모노레포에 대해선 [여기]()에서 알아보았다.
+모노레포에 대해선 [여기](https://jeonyoungho.github.io/posts/%EB%AA%A8%EB%85%B8%EB%A0%88%ED%8F%AC/)에서 알아보았고 모노레포를 구성하는 방법 중에 `yarn workspace` 로 구성하는 방법을 알아보자.
 
 # yarn workspace 사용법
-모노레포를 구성하는 방법 중에 `yarn workspace` 로 구성하는 방법을 알아보자.
-
 들어가기에 앞서 yarn 의 workspace 기능을 통해서 MonoRepo 를 구성하는 방식은 아주 간단하다.
 
 먼저 아래 커맨들를 실행하여 npm프로젝트를 초기화해주자.
