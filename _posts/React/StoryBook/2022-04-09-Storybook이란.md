@@ -10,4 +10,5 @@ comments: true # 댓글 유무 지정
 ---
 
 #### 출처
-- [https://brunch.co.kr/@eight-two-five/14](https://brunch.co.kr/@eight-two-five/14)
+- [https://www.daleseo.com/storybook/](https://www.daleseo.com/storybook/)
+- [https://developer0809.tistory.com/171](https://developer0809.tistory.com/171)
