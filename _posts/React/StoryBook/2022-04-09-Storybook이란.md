@@ -12,3 +12,4 @@ comments: true # 댓글 유무 지정
 #### 출처
 - [https://www.daleseo.com/storybook/](https://www.daleseo.com/storybook/)
 - [https://developer0809.tistory.com/171](https://developer0809.tistory.com/171)
+- [https://storybook.js.org/tutorials/intro-to-storybook/react/ko/get-started/](https://storybook.js.org/tutorials/intro-to-storybook/react/ko/get-started/)
