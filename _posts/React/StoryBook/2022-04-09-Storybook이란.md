@@ -182,4 +182,5 @@ Storybook 관리자가 만든 무료 배포 서비스인 [Chromatic](https://www
 #### 출처
 - [https://www.daleseo.com/storybook/](https://www.daleseo.com/storybook/)
 - [https://developer0809.tistory.com/171](https://developer0809.tistory.com/171)
-- [https://storybook.js.org/tutorials/intro-to-storybook/react/ko/get-started/](https://storybook.js.org/tutorials/intro-to-storybook/react/ko/get-started/)ㅌ
+- [https://storybook.js.org/tutorials/intro-to-storybook/react/ko/get-started/](https://storybook.js.org/tutorials/intro-to-storybook/react/ko/get-started/)
+-[https://velog.io/@coolchaem/ReactTypeScript-APP-storybook-%EC%84%B8%ED%8C%854](https://velog.io/@coolchaem/ReactTypeScript-APP-storybook-%EC%84%B8%ED%8C%854)
