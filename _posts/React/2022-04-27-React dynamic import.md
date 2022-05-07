@@ -194,3 +194,4 @@ chunks 옵션은 `'initial' | 'async' | 'all'` 중 하나를 값으로 가진다
 #### 출처
 - [https://velog.io/@code-bebop/dynamic-import%EC%99%80-React.lazy](https://velog.io/@code-bebop/dynamic-import%EC%99%80-React.lazy)
 - [https://ko.reactjs.org/docs/code-splitting.html](https://ko.reactjs.org/docs/code-splitting.html)
+- [https://pks2974.medium.com/dynamic-import-%EB%A1%9C%EC%9B%B9%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%84%B1%EB%8A%A5-%EC%98%AC%EB%A6%AC%EA%B8%B0-caf62cc8c375](https://pks2974.medium.com/dynamic-import-%EB%A1%9C%EC%9B%B9%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%84%B1%EB%8A%A5-%EC%98%AC%EB%A6%AC%EA%B8%B0-caf62cc8c375)
