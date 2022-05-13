@@ -9,5 +9,7 @@ comments: true # 댓글 유무 지정
 # pin: true # 홈페이지 메인화면에 특정 게시물 고정
 ---
 
+
 #### 출처
+- [https://ko.reactjs.org/docs/state-and-lifecycle.html](https://ko.reactjs.org/docs/state-and-lifecycle.html)
 - [https://velog.io/@st2702/React-Lifecycle-%EC%83%9D%EB%AA%85%EC%A3%BC%EA%B8%B0](https://velog.io/@st2702/React-Lifecycle-%EC%83%9D%EB%AA%85%EC%A3%BC%EA%B8%B0)
