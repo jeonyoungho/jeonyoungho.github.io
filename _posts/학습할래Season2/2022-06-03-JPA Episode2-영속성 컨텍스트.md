@@ -33,7 +33,9 @@ EntityManager.persist(entity);
 ## 엔티티의 생명주기
 엔티티는 아래 이미지와 같은 생명주기를 가지고 있습니다. 비영속, 영속, 준영속, 삭제 까지 총 4가지 상태를 가집니다.
 
-![image](https://user-images.githubusercontent.com/44339530/171622091-191ce9e4-2ac9-4706-82e3-ab0f2635041c.png)
+
+![image](https://user-images.githubusercontent.com/44339530/171790111-3ad7bc18-60ec-4d4a-842e-8b6cb54141ea.png)
+
 
 ### 1) 비영속 (new/transient)
 - 영속성 컨텍스트와 전혀 관계가 없는 새로운 상태
@@ -58,9 +60,10 @@ member.setUsername("회원1");
 - `em.remove(member);`
 
 
+
 영속성 컨텍스트는 논리적인 개념으로 `EntityManager` 를 통해 접근합니다.
 
-![image](https://user-images.githubusercontent.com/44339530/171622164-5333ed63-3f3b-4244-9bdd-0a77f1b07170.png)
+![image](https://user-images.githubusercontent.com/44339530/171790193-53348f0e-e5d8-46fa-a65c-7f6353e9e1c9.png)
 
 스프링 없이 JPA만을 학습하는 입장에선 EntityManager 하나 당 영속성 컨텍스트 하나씩 생긴다고 이해하시면 좋습니다!
 
