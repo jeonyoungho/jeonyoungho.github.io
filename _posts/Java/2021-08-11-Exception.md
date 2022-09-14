@@ -1,5 +1,5 @@
 ---
-title: "[개발자 블로그] Exception"
+title: "[Java] Exception"
 # post의 layout이 기본적으로 post으로 설정되어있어서 Front Matter에 따로 layout변수를 만들어 주지 않아도 된다.
 date: 2021-08-11 +0800
 categories: [Java] # categories는 최대 2개까지 가능
