@@ -57,7 +57,7 @@ module.exports = (env = {}) => {
 
 ```javascript
 ...
-import util from "Util/util"
+import util from "Util/util";
 
 interface Props {
 
