@@ -180,3 +180,7 @@ public enum Elvis {
   - package-private으로 선언하면 같은 패키지에 속한 하위 클래스에서만 사용할 수 있다.
   - protected나 public으로 선언하면 이를 재정의하지 않은 모든 하위 클래스에서 사용할 수 있다.
   - protected나 public이면서 하위 클래스에서 재정의하지 않았다면, 하위 클래스의 인스턴스를 역직렬화하면 상위 클래스의 인스턴스를 생성하여 ClassCastException을 일으킬 수 있다.
+
+
+#### 출처
+- [https://velog.io/@yun12343/Java-%EC%A7%81%EB%A0%AC%ED%99%94-5-%EC%95%84%EC%9D%B4%ED%85%9C-89](https://velog.io/@yun12343/Java-%EC%A7%81%EB%A0%AC%ED%99%94-5-%EC%95%84%EC%9D%B4%ED%85%9C-89)
