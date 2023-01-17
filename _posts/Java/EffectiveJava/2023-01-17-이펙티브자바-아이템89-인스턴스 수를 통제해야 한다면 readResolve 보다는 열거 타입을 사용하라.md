@@ -25,10 +25,9 @@ public class Elvis {
 }
 ```
 
-- 이클래스는 `implements Serializable`을 추가하는 순간 더 이상 싱글턴이 아니게 된다.
+- 이 클래스는 `implements Serializable`을 추가하는 순간 더 이상 싱글턴이 아니게 된다.
   - 기본 직렬화를 쓰지 않거나 명시적인 readObject 메서드를 제공하더라도 소용이 없다. 
   - 어떤 ReadObject 메서드를 사용하더라도 초기화될 때 만들어진 인스턴스와 다른 인스턴스를 반환하게 된다.
-
 
 ### readResolve
 - `readResolve` 기능을 이용하면 readObject 메서드가 만든 인스턴스를 다른 것으로 대체할 수 있다.
