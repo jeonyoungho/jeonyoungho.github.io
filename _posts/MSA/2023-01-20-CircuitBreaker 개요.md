@@ -34,11 +34,13 @@ MSA 로 구성된 환경에서 여러 마이크로서비스들이 존재하고 �
 
 1) 외부 API 통신 시도
 
-2) 외부 통신이 실패함으로써 서킷브레이커 Open
+2) 외부 통신이 몇 번 실패하여 설정된 써킷 오픈 임계치를 넘을 경우, 써킷을 Open
+
+- 위에서 언급된 외부 통신 실패는 timeout 또는 외부 api 측 예외 발생 케이스 두 가지 모두 포함될 수 있음
 
 3) Open과 동시에 외부 서버에 요청을 날리지 않고, Fail Fast로 빠른응답 리턴
 
-4) 서킷브레이커가 오픈하면 일정 시간 후에 반오픈(Half-Open) 상태
+4) 써킷브레이커가 오픈하면 일정 시간 후에 반오픈(Half-Open) 상태
 
 5) 반오픈 상태에서 다시 외부 서비스를 호출해서 장애를 확인하면 Open, 정상 응답이면 닫힘
 
@@ -49,13 +51,25 @@ MSA 로 구성된 환경에서 여러 마이크로서비스들이 존재하고 �
 
 ### CircuitBreaker 구현체
 
-CircuitBreaker 를 제공하는 라이브러리 중에 Netflix Hystrix와 Resilience4j를 두 가지가 존재한다.
+CircuitBreaker 를 제공하는 라이브러리 중에 `Netflix Hystrix`와 `Resilience4j` 두 가지가 존재한다.
 
-Netflix Hystrix는 공식적으로 2018년 앞으로 개발을 중단하고 유지보수 상태라는 글이 명시되어 있으며 Hystrix는 Java 6을 기반으로 만들어졌지만 Resilience4j는 Java 8 기반이며, Hystrix와는 다르게 다른 라이브러의 의존성이 없어서 가볍다.
+`Hystrix`는 Java 6을 기반으로 만들어졌지만 `Resilience4j`는 Java 8 기반이며 `Hystrix` 와는 다르게 다른 라이브러의 의존성이 없어서 가볍다.
 
-### Resilience4j를 활용한 써킷브레이커 적용 예시
+Netflix Hystrix는 공식적으로 2018년 앞으로 개발을 중단하고 유지보수 상태라는 글이 명시되어 있어 `Resilience4j` 를 많이 사용하는 추세다.
 
-예시 프로젝트는 [링크](https://github.com/jeonyoungho/spring-cloud-resilience4j)를 참고하면 좋다.
+> **Note**: `Resilience4j` 는 5개의 모듈(`CircuitBreaker`, `Bulkhead`, `RateLimiter`, `Retry`, `TimeLimiter`)로 구성되어 있어서 학습해보면 좋다.
+
+간략하게 설명하면 아래와 같다.
+
+- `CircuitBreaker`: 장애 전파를 방지하기 위해 사용
+- `Bulkhead`: 동시 실행(Concurrent execution) 수를 제한하는데 사용
+- `RateLimiter`: 일정 시간동안 요청 수를 제한하는데 사용
+- `Retry`: 요청이 실패했을 경우 재시도 정책에 관련한 조건을 관리하기 위해 사용
+- `TimeLimiter`: 원격 서버를 호출하는데 걸리는 시간을 제한
+
+### Feign과 Resilience4j를 활용한 써킷브레이커 적용 예시
+
+예시 프로젝트는 [깃허브 레포지토리](https://github.com/jeonyoungho/spring-cloud-resilience4j)를 참고하면 좋다.
 
 
 아래는 주요 클래스이다.
