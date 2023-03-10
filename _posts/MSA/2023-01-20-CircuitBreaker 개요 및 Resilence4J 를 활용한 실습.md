@@ -1,5 +1,5 @@
 ---
-title: "[MSA] CircuitBreaker 개요 및 Resilence4J 실습" # post의 layout이 기본적으로 post로 설정되어있어서 Front Matter에 따로 layout변수를 만들어 주지 않아도 됨
+title: "[MSA] CircuitBreaker 개요 및 Resilence4J 를 활용한 실습" # post의 layout이 기본적으로 post로 설정되어있어서 Front Matter에 따로 layout변수를 만들어 주지 않아도 됨
 date: 2023-01-20 +0800
 categories: [MSA, CircuitBreaker] # categories는 최대 2개까지 가능
 tags: [msa, microservicearchitecture, circuitbreaker, hystrix, resilience4j] # TAG는 반드시 소문자로 이루어져야함, 0~무한개까지 지정 가능
