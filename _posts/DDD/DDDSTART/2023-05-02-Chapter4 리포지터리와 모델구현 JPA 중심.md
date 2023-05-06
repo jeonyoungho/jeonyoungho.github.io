@@ -299,7 +299,111 @@ Article article = entityManager.find(Article.class, 1L);
   - <b>대신 조회 전용 기능을 구현하는 방법을 사용하는 것이 좋다.</b>
   - JPA에서 조회 전용 쿼리를 실행하는 방법은 5장에서 살펴본다.
 
+### 밸류 컬렉션을 @Entity 로 매핑하기
 
+- 개념적으로 밸류인데 구현 기술 한계나 팀 표준으로 @Entity를 사용해야 할 때가 있다. 
+  - 예를 들어, 이미지 업로드 방식에 따라 이미지 경로와 썸네일 이미지 제공 여부가 달라진다고 했을 때 아래와 같은 계층 구조로 설계할 수 있다.
+
+![image](https://user-images.githubusercontent.com/44339530/236620469-eb4cadc9-4a34-4bc6-afa8-4da88b0d05b5.png)
+
+- JPA는 `@Embeddable` 타입의 클래스 상속 매핑을 지원하지 않는다.
+- 따라서 상속 구조를 갖는 밸류 타입을 사용하려면 `@Embeddable` 대신 `@Entity` 를 이용한 상속 매핑으로 처리해야 한다.
+- <b>Image는 엔티티가 아니라 밸류이므로 상태를 변경하는 기능은 추가하지 않는다.</b>
+
+```java
+@Entity
+@Inheritance(startegy = InheritanceType.SINGLE_TABLE)
+@Descriminator(name = "image_type")
+@Table(name = "image")
+public abstract class Image {
+  ...
+  // 밸류 타입이므로 상태 변경 기능이 있어선 안된다
+}
+
+@Entity
+@DiscriminatorValue("II")
+public class InternalImage extends Image {
+  ...
+}
+
+@Entity
+@DiscrimnatorValue("EI")
+public class ExternalImage extends Image {
+  ...
+}
+```
+
+- Image는 밸류이므로 독자적인 라이프사이클을 갖지 않고 Product에 완전히 의존한다.
+- 따라서 `cascade` 속성을 이용해서 Product 를 저장시 함께 저장되고, Product 삭제시 함께 삭제되도록 설정한다.
+- 리스트에서 Image 객체를 제거하면 DB에서 함께 삭제되도록 orphanRemoval 을 true로 설정한다.
+
+```java
+@Entity
+@Table(name = "product")
+public class Product {
+  ...
+
+  @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+  @JoinColumn(name = "product_id")
+  @OrderColumn(name = "list_idx")
+  private List<Image> images = new ArrayList<>();
+  ...
+  public void changeImages(List<Image> newImages) {
+    images.clear();
+    images.addAll(newImages);
+  }
+}
+```
+
+- 하이버네이트에선 위처럼 엔티티를 위한 컬렉션 객체(images)의 clear 메서드를 호출시 select 쿼리로 대상 엔티티를 로딩 후 각 개별 엔티티에 대해 delete 쿼리를 수행한다.
+  - 변경 빈도가 낮으면 괜찮지만 빈도가 높으면 전체 서비스 성능에 문제가 될 수 도 있다.
+- 하이버네이트는 위와 반대로 `@Embeddable` 타입에 대한 컬렉션의 clear() 메서드를 호출하면 컬렉션에 속한 객체를 로딩하지 않고 한 번의 delete 쿼리로 삭제 처리를 수행한다,,
+  - 이 경우엔 타입에 따라 다른 기능을 구현하려면 다음과 같이 if-else를 써야 하는 단점이 발생한다.
+
+```java
+@Embeddable
+public class Image {
+  @Column(name = "image_type")
+  private String imageType;
+  @Column(name = "image_path")
+  private String path;
+
+  ...
+  public boolean hasThumbnail() {
+    // 성능을 위해 다형을 포기하고 if-else로 구현
+    if (imageType.equals("II")) {
+      return true;
+    }
+
+    return false;
+  }
+}
+```
+
+- 코드 유지보수와 성능의 두 가지 측면을 고려해서 구현방식을 적절히 선택해야 한다.
+
+### ID 참조와 조인 테이블을 이용한 단방향 M:N 매핑
+- 앞서 3장에서 애그리거트 간 집합 연관은 성능상의 이유로 피해야 한다고 했다.
+- 그럼에도 불구하고 필요하다면 ID 참조를 이용한 단방향 집합 연관을 적용해 볼 수 있다.
+
+```java
+@Entity
+@Table(name = "product")
+public class Product {
+  @EmbeddedId
+  private ProductId id;
+    
+  @ElementCollection 
+  @CollectionTable(name = "product_category", joinColumns = @JoinColumn(name = "product_id"))
+  private Set<CategoryId> categoryIds;
+
+  ...
+}
+```
+
+- ID 참조를 이용한 애그리거트 간 단방향 M:N 연관은 밸류 컬렉션 매핑과 동일한 방식으로 설정한 것을 알 수 있다.
+- `@ElementCollection` 을 이용하기 때문에 Product 를 삭제할 때 매핑에 사용한 조인 테이블의 데이터도 함께 삭제된다.
+- 애그리거트를 직접 참조하는 방식을 사용했다면 영속성 전파나 로딩 전략을 고민해야 하는데 ID 참조방식을 사용함으로써 이런 고민을 할 필요가 사라지게 된다.
 
 
 ### Reference
