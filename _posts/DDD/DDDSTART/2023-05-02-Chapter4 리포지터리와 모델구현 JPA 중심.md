@@ -9,8 +9,6 @@ comments: true # 댓글 유무 지정
 # pin: true # 홈페이지 메인화면에 특정 게시물 고정
 ---
 
-Chatper4 의 내용은 [인프런 JPA 기본편](https://jeonyoungho.github.io/categories/%EC%9D%B8%ED%94%84%EB%9F%B0jpa-%EA%B8%B0%EB%B3%B8%ED%8E%B8/) 의 내용과 중복되는 부분이 많아 많은 내용이 생략될 예정이다.
-
 ### JPA를 이용한 리포지토리 기능 구현
 
 #### 모듈 구현
