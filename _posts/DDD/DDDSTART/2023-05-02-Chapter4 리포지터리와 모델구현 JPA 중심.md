@@ -403,6 +403,133 @@ public class Product {
 - `@ElementCollection` 을 이용하기 때문에 Product 를 삭제할 때 매핑에 사용한 조인 테이블의 데이터도 함께 삭제된다.
 - 애그리거트를 직접 참조하는 방식을 사용했다면 영속성 전파나 로딩 전략을 고민해야 하는데 ID 참조방식을 사용함으로써 이런 고민을 할 필요가 사라지게 된다.
 
+### 애그리거트 로딩 전략
+- JPA 매핑을 설정할 때 항상 기억해야 할 점은 애그리거트에 속한 객체가 모두 모여야 완전한 하나가 된다는 것이다.
+-  즉, 다음과 같이 애그리거트 루트를 로딩시 루트에 속한 모든 객체가 완전한 상태여야 함을 의미한다.
+
+```java
+// product 는 완전한 하나여야 한다.
+Prodcut product = productRepository.findById(id);
+```
+
+- 엔티티에 대한 매핑의 fetch 속성을 즉시 로딩(FetchType,EAGER)로 설정하면 find() 메서드로 애그리거트 루트를 구할 때 연관된 구성요소를 DB에서 함께 읽어온다.
+- 하지만 컬렉션에 대해 로딩 전략을 EAGER 로 설정시엔 오히려 즉시 로딩 방식이 문제가 될 수 있다.
+
+```java
+@Entity
+public class Product {
+  ...
+  @OneToMany(
+    cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+    orphanRemoval = true,
+    fetch = FetchType.Eager)
+  @JoineColumn(name = "product_id")
+  @OrderColumn(name = "list_idx")
+  private List<Image> images = new ArrayList<>();
+
+  @ElementCollection(fetch = FetchType.EAGER)
+  @CollectionTable(name = "product_option", joinColumns = @JoinColumn(name = "product_id"))
+  @OrderColumn(name = "list_idx")
+  private List<Option> options = new ArrayList<>();
+  
+  ...
+}
+```
+
+- 위와 같이 images 와 options 모두 EAGER 로 지정되어있을때 카타시안 조인을 사용해 불러오는데 이는 쿼리 결과에 중복을 발생한다.
+  - Proudct의 image 가 2개이고 option이 2개이면 쿼리 결과로 구해지는 행 개수는 4개일 것이다.
+  - 만약 데이터가 많다고하면 성능 문제가 될 수도 있다.
+- <b>애그리거트는 개념적으로 하나여야 하지만, 루트 엔티티를 로딩하는 시점에 애그리거트에 속한 객체를 모두 로딩해야 하는 것은 아니다.</b>
+- 애그리거트가 완전해야 하는 이유는 두 가지다.
+  - 1)상태를 변경하는 기능 실행시 애그리거트 상태가 완전해야 하기 때문에
+  - 2)표현 영역에서 애그리거트의 상태 정보를 보여줄 때 필요하기 때문에
+- 두 번째 이유는 별도의 조회 전용 기능을 구현하는 방식을 사용하는 것이 유리할 때가 많기에 애그리거트의 완전한 로딩과 관련된 문제는 상태 변경과 더 관련이 있다.
+- 하지만 상태 변경 기능을 실행하기 위해 조회 시점에 즉시 로딩을 이용해서 애그리거트를 완전한 상태로 로딩할 필욘 없다.
+- JPA는 트랜잭션 범위 내에서 지연 로딩을 허용하기 때문에 다음 코드처럼 실제로 상태를 변경하는 시점에 필요한 구성요소만 로딩해도 문제가 되지 않는다.
+
+```java
+@Transactional
+public void removeOptions(ProductId id, int optIdxToBeDeleted) {
+  // Product 를 로딩. 컬렉션은 지연 로딩으로 설정했다면, Option은 로딩하지 않음
+  Prodcut product = productRepository.findById(id);
+  // 트랜잭션 범위이므로 지연 로딩으로 설정한 연관 로딩 가능
+  product.removeOption(optIdxToBeDeleted);
+}
+
+@Entity
+public class Product {
+  @ElementCollection(fetch = FetchType.LAZY)
+  @CollectionTable(name = "product_option", joinColumns = @JoinColumn(name = "product_id"))
+  @OrderColumn(name = "list_idx")
+  private List<Option> options = new ArrayList<>();
+  
+  public void removeOption(int optIdx) {
+    // 실제 컬렉션에 접근할 때 로딩
+    this.options.remove(optIdx);
+  }
+}
+```
+
+- 상태를 변경하는 기능을 실행하는 빈도보다 조회하는 기능을 실행하는 빈도가 훨씬 높다.
+  - 그러므로 상태 변경을 위해 지연 로딩을 사용할 때 발생하는 추가 쿼리로 인한 실행 속도 저하는 문제 되지 않는다.
+- 위와 같은 이유로 애그리거트 내의 모든 연관을 즉시 로딩으로 설정할 필욘 없다. 애그리거트에 맞게 즉시 로딩과 지연 로딩을 적절히 선택해야 한다.
+
+### 애그리거트의 영속성 전파
+- 애그리거트를 저장하거나 삭제할땐 애그리거트에 속한 모든 객체를 함께 저장하거나, 함께 삭제해야 한다.
+- `@Embeddable` 매핑 타입의 경우엔 함께 저장되고 삭제되므로 cascade 속성을 추가로 설정하지 않아도 된다.
+- 반면에 @Entity 타입에 대한 매핑은 cascade 속성을 사용해서 저장과 삭제시 함께 처리되도록 설정해야 한다.
+- `@OneToOne`, `@OneToMany` 는 cascade 속성의 기본값이 없으므로 다음 코드처럼 cascade 속성 값으로 CascadeType.PERSIST, CascadeType.REMOVE 를 설정해야 한다.
+
+```java
+@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+          orphanRemoval = true)
+@JoinColumn(name = "product_id")
+@OrderColumn(name = "list_idx")
+private List<Image> images = new ArrayList<>();
+```
+
+### 식별자 생성 기능
+- 식별자는 아래 세 가지 방식 중 하나로 생성한다.
+  - 1)사용자가 직접 생성
+  - 2)도메인 로직으로 생성
+  - 3)DB 를 이용한 일련번호 생성
+
+#### 1) 사용자가 직접 생성
+- 식별자 생성주체가 사용자이므로 도메인 영역에 식별자 생성 기능을 구현할 필요 없다.
+
+#### 2) 도메인 로직으로 생성
+- 별도 서비스로 식별자 생성 기능을 분리해야 한다.
+- 식별자 생성 규칙은 도메인 규칙이므로 도메인 영역에 식별자 생성 기능을 위치시켜야 한다.
+
+```java
+public class OrderIdService {
+  public OrderId createId(UserId userId) {
+    if (userId == null) {
+      throw new IllegalArgumentException("invalid userid: " + userId);
+
+      return new OrderId(userId.toString() + "-" + timestamp());
+    }
+  }
+
+  private String timestamp() {
+    return Long.toString(System.currentTimeMillis());
+  }
+}
+```
+
+- 또한 식별자 생성 규칙을 규현하기에 적합한 또 다른 위치는 리포지터리이다.
+
+```java
+public interface ProductRepository {
+  ...
+  ProductId nexxtId();
+  ...
+}
+```
+
+#### 3) DB 를 이용한 일련번호 생성
+- JPA는 저장 시점에 생성한 식별자를 @Id로 매핑한 프로퍼티/필드에 할당한다.
+- 실제 저장(영속화)된 후에 할당된 식별자를 사용할 수 있다.
 
 ### Reference
 - 예제 코드 및 이미지
