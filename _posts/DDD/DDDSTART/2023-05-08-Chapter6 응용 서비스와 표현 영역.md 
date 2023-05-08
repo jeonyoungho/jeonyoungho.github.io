@@ -9,6 +9,11 @@ comments: true # 댓글 유무 지정
 # pin: true # 홈페이지 메인화면에 특정 게시물 고정
 ---
 
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5958719204143086"
+    crossorigin="anonymous"></script>
+
+
 ### Reference
 - 예제 코드 및 이미지
   - [https://heeveloper.github.io/2020/07/18/04-%EB%A6%AC%ED%8F%AC%EC%A7%80%ED%84%B0%EC%99%80-%EB%AA%A8%EB%8D%B8-%EA%B5%AC%ED%98%84/](https://heeveloper.github.io/2020/07/18/04-%EB%A6%AC%ED%8F%AC%EC%A7%80%ED%84%B0%EC%99%80-%EB%AA%A8%EB%8D%B8-%EA%B5%AC%ED%98%84/)
