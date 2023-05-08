@@ -63,11 +63,15 @@ interface Props {
 
 }
 
+const styles = {
+  padding: "50px"
+};
+
 const App: React.FC<Props> = observer((props) => {
     ...
 
     return (
-        <div style={{padding: '50px'}}>
+        <div style={styles}>
             <div className={s.text}>person name: {person.name}</div>
             <div>util value is {util.value}</div>
             ...
