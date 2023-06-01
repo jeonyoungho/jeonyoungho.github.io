@@ -10,3 +10,6 @@ comments: true # 댓글 유무 지정
 ---
 
 ### 시작에 앞서
+- CQRS 는 명령(COMMAND) 모델과 조회(Query) 모델을 분리하는 패턴이다.
+
+
