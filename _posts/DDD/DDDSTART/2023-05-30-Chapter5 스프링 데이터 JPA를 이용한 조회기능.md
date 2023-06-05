@@ -19,3 +19,4 @@ comments: true # 댓글 유무 지정
 > **Note**: 모든 DB연동 코드를 JPA만 사용해서 구현해야 한다고 생각하진 말자. MyBatis, JdbcTemplate 등 다양한 기술을 사용해서 조회 모델을 구현할 수 있다.
 
 ### 검색을 위한 스펙
+- 검색 조건을 다양하게 조합해야 할 때 사용할 수 있는 것이 스펙(Specification)이다.
