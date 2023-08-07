@@ -112,6 +112,7 @@ comments: true
 
 > 좋은 아키텍트는 결정되지 않은 사항의 수를 최대화 한다.
 
+### 장치 독립성
 
 #### Reference
 - [https://velog.io/@ssuh0o0/Clean-Architecture-15%EC%9E%A5-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EB%9E%80](https://velog.io/@ssuh0o0/Clean-Architecture-15%EC%9E%A5-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EB%9E%80)
