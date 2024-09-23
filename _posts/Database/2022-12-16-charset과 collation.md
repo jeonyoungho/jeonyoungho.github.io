@@ -80,6 +80,8 @@ UTF-8 문자 집합은 1~4 바이트까지 저장이 가능하게 설계되었�
 
 ![image](https://user-images.githubusercontent.com/44339530/208071758-037542b9-0d41-418b-89e4-bc44969fde94.png)
 
+> **Note**: mariadb utf8 문자집합에서 영문은 1바이트, 한글은 3바이트, 이모지는 4바이트로 저장된다. ([참고](https://sleepyeyes.tistory.com/94))
+
 
 ### MySQL(MariaDB)의 대소문자 구별하는 유니크 제약 조건 추가하는 방법
 
