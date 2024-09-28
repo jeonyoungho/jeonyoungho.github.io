@@ -11,6 +11,7 @@ comments: true # 댓글 유무 지정
 
 
 
+
 #### 출처
 - [https://medium.com/daangn/varchar-vs-text-230a718a22a1](https://medium.com/daangn/varchar-vs-text-230a718a22a1)
 - [https://dkswnkk.tistory.com/714](https://dkswnkk.tistory.com/714)
