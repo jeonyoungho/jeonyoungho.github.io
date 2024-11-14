@@ -5,8 +5,6 @@ categories: [학습할래]
 tags: [jpa]
 toc: true
 comments: true
-# image: /assets/img/test.png
-# pin: true
 ---
 
 이전 JPA 에피소드 1탄에서 SQL 중심적인 개발의 문제점과 JPA를 왜 써야하는지?에 대해서 알아보았는데요, 또한 JPA에서 가장 중요한 2가지를 언급드렸었습니다.

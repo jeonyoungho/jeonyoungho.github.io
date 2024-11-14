@@ -5,8 +5,6 @@ categories: [학습할래]
 tags: [mobx]
 toc: true
 comments: true
-# image: /assets/img/test.png
-# pin: true
 ---
 
 일반적으로 브라우저에 접속하면 해당 브라우저에서 필요한 html 파일을 네트워크를 통해 가져오고, 해당 html 파일에 명시된 자바스크립트 파일, 스타일 시트 파일들을 함께 가져오게 됩니다.

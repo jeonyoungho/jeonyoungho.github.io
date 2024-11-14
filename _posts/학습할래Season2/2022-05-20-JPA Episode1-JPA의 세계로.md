@@ -5,8 +5,6 @@ categories: [학습할래]
 tags: [jpa]
 toc: true
 comments: true
-# image: /assets/img/test.png
-# pin: true
 ---
 
 ## JPA 왜 써야하는가?
