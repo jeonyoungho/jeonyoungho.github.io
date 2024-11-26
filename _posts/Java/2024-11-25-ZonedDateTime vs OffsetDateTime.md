@@ -31,3 +31,4 @@ OffsetDateTime 은 항상 동일한 시점을 나타내기에 일관성 있는 �
 ### Reference
 - [https://jodmsoluth.tistory.com/5](https://jodmsoluth.tistory.com/5)
 - [https://sujl95.tistory.com/86](https://sujl95.tistory.com/86)
+- [https://developer-pi.tistory.com/340](https://developer-pi.tistory.com/340)
