@@ -1,7 +1,7 @@
 ---
-title: "[학습할래?][JPA-Episode2] 영속성 컨텍스트"
+title: "[학습할래][JPA-Episode2] 영속성 컨텍스트"
 date: 2022-06-03 +0800
-categories: [학습할래?]
+categories: [학습할래]
 tags: [jpa]
 toc: true
 comments: true

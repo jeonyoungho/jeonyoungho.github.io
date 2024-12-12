@@ -1,7 +1,7 @@
 ---
-title: "[학습할래?][JPA-Episode1] JPA의 세계로"
+title: "[학습할래][JPA-Episode1] JPA의 세계로"
 date: 2022-05-20 +0800
-categories: [학습할래?]
+categories: [학습할래]
 tags: [jpa]
 toc: true
 comments: true

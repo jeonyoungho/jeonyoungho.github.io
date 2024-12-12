@@ -1,7 +1,7 @@
 ---
-title: "[학습할래?] Dynamic Import"
+title: "[학습할래] Dynamic Import"
 date: 2022-05-02 +0800
-categories: [학습할래?]
+categories: [학습할래]
 tags: [mobx]
 toc: true
 comments: true
