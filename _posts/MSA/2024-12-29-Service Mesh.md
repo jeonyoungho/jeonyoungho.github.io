@@ -134,6 +134,8 @@ API 게이트웨이를 통해 클라이언트 요청을 수신하고, 서비스 
 
 또한, 통합된 모니터링과 로깅 시스템을 구축하여 시스템 상태를 실시간으로 파악할 수 있다.
 
+> 서비스 매시 구현 실습은 추후 진행하여 업데이트 예정입니다😃
+
 ### Reference
 - [https://kkang-joo.tistory.com/77](https://kkang-joo.tistory.com/77)
 - [https://medium.com/twolinecode/30-서비스-메시-service-mesh-란-3d769f54cd9a](https://medium.com/twolinecode/30-%EC%84%9C%EB%B9%84%EC%8A%A4-%EB%A9%94%EC%8B%9C-service-mesh-%EB%9E%80-3d769f54cd9a)
