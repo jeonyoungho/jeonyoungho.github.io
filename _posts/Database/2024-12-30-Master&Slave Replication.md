@@ -2,7 +2,7 @@
 title: "[Database] Master&Slave Replication"
 date: 2024-12-30 +0800
 categories: [Database]
-tags: [database, mysql, mariadb, masterslave]
+tags: [database, mysql, mariadb, masterslave, mha]
 toc: true
 comments: true
 ---
@@ -88,6 +88,7 @@ _출처: https://velog.io/@sweet_sumin/DB-Master-Slave-개념_
 - 서비스가 동작안하는 다운 타임을 최소화하는게 핵심이다.
 - Master 장애로 각 노드(Master 및 Slave)의 데이터 불일치가 발생하지 않는다. MHA Monitor가 Master의 Binary Log와 Slave들의 Relay Log를 확인하여 DB 간의 차이나는 쿼리를 DB에 반영시키기 때문이다. (Master의 변경 기록 확인)
 - MariaDB 기반 MHA + Replication 구성하는 예제는 [여기](https://onestone-note.tistory.com/34)를 참고하면 된다.
+
 
 
 
