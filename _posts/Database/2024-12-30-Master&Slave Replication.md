@@ -115,6 +115,7 @@ _출처: https://jwdeveloper.tistory.com/215_
 - Master 장애로 각 노드(Master 및 Slave)의 데이터 불일치가 발생하지 않는다. MHA Manager(Monitor)가 Master의 Binary Log와 Slave들의 Relay Log를 확인하여 DB 간의 차이나는 쿼리를 DB에 반영시키기 때문이다. (Master의 변경 기록 확인)
 
 # MariaDB 기반 이중화 구성
+- [https://onethejay.tistory.com/182](https://onethejay.tistory.com/182)
 - [https://velog.io/@oksk4753/Docker를-이용한-Mysql-MariaDB-단방향-이중화-구성](https://velog.io/@oksk4753/Docker%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-Mysql-MariaDB-%EB%8B%A8%EB%B0%A9%ED%96%A5-%EC%9D%B4%EC%A4%91%ED%99%94-%EA%B5%AC%EC%84%B1)
 - [https://onestone-note.tistory.com/34](https://onestone-note.tistory.com/34)
 
