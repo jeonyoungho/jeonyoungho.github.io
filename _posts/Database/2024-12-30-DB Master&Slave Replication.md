@@ -1,5 +1,5 @@
 ---
-title: "[Database] Master&Slave Replication"
+title: "DB Master&Slave Replication"
 date: 2024-12-30 +0800
 categories: [Database]
 tags: [database, mysql, mariadb, masterslave, mha]
