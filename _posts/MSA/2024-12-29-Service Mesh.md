@@ -1,5 +1,5 @@
 ---
-title: "[MSA] Service Mesh"
+title: "Service Mesh"
 date: 2024-12-29 +0800
 categories: [MSA]
 tags: [msa, servicemesh]
