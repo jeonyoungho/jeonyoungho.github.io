@@ -1,5 +1,5 @@
 ---
-title: "[Database] MySQL VARCHAR vs TEXT"
+title: "MySQL VARCHAR vs TEXT"
 date: 2024-09-23 +0800
 categories: [Database]
 tags: [database, mysql, mariadb]
