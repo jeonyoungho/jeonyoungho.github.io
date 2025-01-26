@@ -1,5 +1,5 @@
 ---
-title: "[Architecture] 읽으면 유용한 아키텍처 관련 칼럼 모음"
+title: "읽으면 유용한 Architecture 칼럼 모음"
 date: 2023-04-28 +0800
 categories: [Architecture]
 tags: [architecture]
