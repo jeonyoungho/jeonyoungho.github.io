@@ -9,7 +9,7 @@ comments: true
 # pin: true
 ---
 
-### 시작에 앞서
+## 시작에 앞서
 - CQRS 는 명령(COMMAND) 모델과 조회(Query) 모델을 분리하는 패턴이다.
   - 명령 모델은 상태(데이터)를 변경하는 기능을 구현할 때 사용된다(ex. 회원 가입, 암호 변경, 주문 취소)
   - 조회 모델은 데이터를 조회하는 기능을 구현시 사용된다.(ex. 주문 목록, 주문 상세)
@@ -18,7 +18,7 @@ comments: true
 
 > **Note**: 모든 DB연동 코드를 JPA만 사용해서 구현해야 한다고 생각하진 말자. MyBatis, JdbcTemplate 등 다양한 기술을 사용해서 조회 모델을 구현할 수 있다.
 
-### 검색을 위한 스펙
+## 검색을 위한 스펙
 - 검색 조건이 고정되어 있다면 특정 조건으로 조회하는 기능을 만들면 되지만, 만약 검색 조건을 다양하게 조합해야 할 때 사용할 수 있는 것이 스펙(Specification)이다.
 - 스펙은 애그리거트가 특정 조건을 충족하는지를 검사할 때 사용하는 인터페이스다.
 
@@ -70,7 +70,7 @@ List<Order> orders = orderRepository.findAll(ordererSpec);
 - 모든 애그리거트 객체를 메모리에 보관핟기도 어렵고 설사 메모리에 다 보관할 수 있다하더라도 조회 성능에 심각한 문제가 발생하기 때문이다.
 - 실제 스펙은 사용하는 기술에 맞춰 구현하면 되는데 스프링 데이터 JPA를 이용한 스펙 구현에 대해 알아볼 것이다.
 
-### 스프링 데이터 JPA를 이용한 스펙 구현
+## 스프링 데이터 JPA를 이용한 스펙 구현
 
 - 스프링 데이터 JPA 는 검색 조건을 표현하기 위한 인터페이스인 Specification 을 제공한다.
 
@@ -126,7 +126,7 @@ public class OrderSummarySpec {
 Specification<OrderSummary> betweenSpec = OrderSummarySpecs.orderDateBetween(from, to);
 ```
 
-#### JPA 정적 메타 모델
+### JPA 정적 메타 모델
 - 위 예제 코드에서 OrderSummary_.ordererId 로 사용되는 부분이 있는데, OrderSummary_ 클래스는 JPA정적 메타 모델을 정의한 코드이다.
 - 정적 메타 모델 클래스는 다음과 같이 구현 가능하다.
 
@@ -156,7 +156,7 @@ cb.equals(root.<String>get("ordererId"), ordererId);
 - 이런 이유로 Criteria를 사용할땐 정적 메타 모델 클래스를 사용하는 것이 코드 안정성이나 생산성 측면에서 유리하다.
 - 정적 메타 모델 클래스를 직접 작성할 수 있지만 하이버네이트와 같은 JPA 프로바이더는 정적 메타 모델을 생성하는 도구를 제공하고 있으므로 이들 도구를 사용하면 편리하다.
 
-### 리포지터리/DAO에서 스펙 사용하기
+## 리포지터리/DAO에서 스펙 사용하기
 - 스펙을 충족하는 엔티티를 검색하고 싶다면 findAll() 메서드를 사용하면 된다.
 - 스프링 데이터 JPA 사용시 JpaSpecificationExecutor 를 상속받아서 사용 가능하다.
 
@@ -170,7 +170,7 @@ public interface JpaSpecificationExecutor<T> {
 }
 ```
 
-### 스펙 조합
+## 스펙 조합
 - 스프링 데이터 JPA가 제공하는 스펙 인터페잇느느 스펙을 조합할 수 있는 두 메서드 `and()`, `or()` 를 제공하다.
   - and(): 두 스펙을 모두 충족하는 조건을 표현하는 스펙 생성
   - or(): 두 스펙 중 하나 이상 충족하는 조건을 표현하는 스펙을 생성
@@ -227,10 +227,10 @@ Specification<OrderSummary> spec = nullable == null ? otherSpec : nullableSpec.a
 Specification<OrderSummary> spec = Specification.where(createNulalbleSpec()).and(createOtherSpec());
 ```
 
-### 정렬 지정하기
+## 정렬 지정하기
 - 스프링 데이터 JPA는 두 가지 방법을 사용해서 정렬을 지정 가능하다.
 
-### 1) 메서드 이름에 OrderBy를 사용해서 정렬 기준 지정
+## 1) 메서드 이름에 OrderBy를 사용해서 정렬 기준 지정
 
 ```java
 public interface OrderSummaryRepository extends JpaRepository<OrderSummary, Integer> {
@@ -243,7 +243,7 @@ public interface OrderSummaryRepository extends JpaRepository<OrderSummary, Inte
 - 위 방법의 단점은 정렬 조건이 많아질수록 메서드명이 길어진다는 것과 메서드 일므으로 정렬 순서가 정해지기 때문에 상황에 따라 정렬순서를 변경할 수도 없다.
 - 이땐 아래 Sort 타입을 사용하면 된다.
 
-### 2) Sort를 인자로 전달
+## 2) Sort를 인자로 전달
 
 ```java
 public interface OrderSummaryRepository extends JpaRepository<OrderSummary, Integer> {
@@ -269,7 +269,7 @@ Sort sort sort1.and(sort2);
 Sort sort = Sort.by("number").ascending().and(Sort.by("orderDate").descending());
 ```
 
-### 페이징 처리하기
+## 페이징 처리하기
 - 스프링 데이터 JPA 는 페이징 처리를 위해 Pageable 인터페이스 타입을 이용한다.
 - Sort 타입과 마찬가지로 find 메서드에 Pageable 타입 파라미터를 사용하면 페이징을 자동으로 처리해준다.
 
@@ -336,7 +336,7 @@ List<MemberData> findTop3ByNameLikeOrderByName(String name);
 MemberData findFirstByBlockedOrderById(boolean blocked);
 ```
 
-### 스펙 조합을 위한 스펙 빌더 클래스
+## 스펙 조합을 위한 스펙 빌더 클래스
 - 스펙을 생성하다보면 다음 코드처럼 조건에 따라 스펙을 조합해야 할 때가 있다.
 
 ```java
@@ -425,7 +425,7 @@ public class SpecBuilder {
 }
 ```
 
-### 동적 인스턴스 생성
+## 동적 인스턴스 생성
 - JPA 는 쿼리 결과에서 임의의 객체를 동적으로 생성할 수 있는 기능을 제공하고 있다.
   - Projection 을 의미한다.
 - 조회 전용 모델을 만드는 이유는 표현 영역을 통해 사용자에게
@@ -468,7 +468,7 @@ public class OrderView {
 }
 ```
 
-### 하이버네이트 @Subselect 사용
+## 하이버네이트 @Subselect 사용
 - 하이버네이트는 JPA 확장 기능으로 `@Subselect` 를 제공한다.
 - `@Subselect` 는 쿼리 결과를 @Entity로 매핑할 수 있는 유용한 기능이다.
 
@@ -564,6 +564,6 @@ where osm.orderer_id = ? order by osm.number desc
 - `@Subselect` 를 사용할 때는 쿼리가 이러한 형태를 갖는다는 점을 유념해야 한다.
 - 서브 쿼리를 사용하고 싶지 않다면 네이티브 SQL 쿼리를 사용하거나 마이바티스와 같은 별도 매퍼를 사용해서 조회 기능을 구현해야 한다.
 
-### Reference
+## Reference
 - 예제 코드 및 이미지
   - [https://velog.io/@csh0034/%EB%8F%84%EB%A9%94%EC%9D%B8-%EC%A3%BC%EB%8F%84-%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-05.-%EC%8A%A4%ED%94%84%EB%A7%81-%EB%8D%B0%EC%9D%B4%ED%84%B0-JPA%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%A1%B0%ED%9A%8C-%EA%B8%B0%EB%8A%A5](https://velog.io/@csh0034/%EB%8F%84%EB%A9%94%EC%9D%B8-%EC%A3%BC%EB%8F%84-%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-05.-%EC%8A%A4%ED%94%84%EB%A7%81-%EB%8D%B0%EC%9D%B4%ED%84%B0-JPA%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%A1%B0%ED%9A%8C-%EA%B8%B0%EB%8A%A5)
