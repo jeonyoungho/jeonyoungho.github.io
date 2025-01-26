@@ -1,12 +1,11 @@
 ---
 title: "[도메인주도개발시작하기] Chapter11-CQRS"
-date: 2023-06-17 15:10:00 +0800
+date: 2023-06-17 +0800
 categories: [책, 도메인주도개발시작하기]
 tags: [ddd, dddstart]
 toc: true
 comments: true
-# image: /assets/img/test.png
-# pin: true
+published: false
 ---
 
 ## 11. 1 단일 모델의 단점

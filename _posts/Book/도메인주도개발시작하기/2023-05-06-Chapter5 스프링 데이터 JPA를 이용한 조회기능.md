@@ -1,12 +1,11 @@
 ---
 title: "[도메인주도개발시작하기] Chapter5-스프링 데이터 JPA를 이용한 조회기능"
-date: 2023-05-06 15:10:00 +0800
+date: 2023-05-06 +0800
 categories: [책, 도메인주도개발시작하기]
 tags: [ddd, dddstart]
 toc: true
 comments: true
-# image: /assets/img/test.png
-# pin: true
+published: false
 ---
 
 ## 시작에 앞서

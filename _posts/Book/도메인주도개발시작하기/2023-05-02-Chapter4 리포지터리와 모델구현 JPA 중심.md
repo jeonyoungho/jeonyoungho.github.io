@@ -1,12 +1,11 @@
 ---
 title: "[도메인주도개발시작하기] Chapter4-리포지터리와 모델구현(JPA 중심)"
-date: 2023-05-02 15:10:00 +0800
+date: 2023-05-02 +0800
 categories: [책, 도메인주도개발시작하기]
 tags: [ddd, dddstart]
 toc: true
 comments: true
-# image: /assets/img/test.png
-# pin: true
+published: false
 ---
 
 ## JPA를 이용한 리포지토리 기능 구현
