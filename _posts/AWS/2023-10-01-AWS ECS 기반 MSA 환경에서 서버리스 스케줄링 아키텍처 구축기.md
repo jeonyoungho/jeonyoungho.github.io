@@ -93,7 +93,7 @@ auto commit 방식으로 운영하며 auto.commit.interval.ms 내에 로직 수�
 
 또한 스케줄링 구현 로직은 최대한 멱등하게 설계/구현하는 것이 운영 및 유지보수 관점에서 효율적일 것이다.
 
-#### Reference
+# Reference
 - [https://blog.voidmainvoid.net/262](https://blog.voidmainvoid.net/262)
 - [https://tillog.netlify.app/posts/kafka-message-issue](https://tillog.netlify.app/posts/kafka-message-issue)
 - [https://docs.spring.io/spring-kafka/reference/kafka/receiving-messages/listener-annotation.html](https://docs.spring.io/spring-kafka/reference/kafka/receiving-messages/listener-annotation.html)
