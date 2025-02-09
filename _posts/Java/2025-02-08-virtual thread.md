@@ -56,7 +56,21 @@ Thread 대기 시간을 줄이기 위해 Webflux 같은 개념이 등장했지�
 # 3. Virtual Thread 모델
 Virtual Thread는 JDK21에 추가된 경량 스레드 모델이다. 
 
-새로운 유저 스레드가 실행될때마다 OS 커널 스레드를 매번 생성하지 않고, JVM 내부 가상 스레드를 생성하는 방식으로 수십만 ~ 수백만개의 스레드를 동시에 사용할 수 있다. 생성된 가상 스레드는 JVM 내부 스케줄러에 의해 실행된다.
+새로운 유저 스레드가 실행될때마다 OS 커널 스레드를 매번 생성하지 않고, JVM 내부 가상 스레드를 생성하는 방식으로 수십만 ~ 수백만개의 스레드를 동시에 사용할 수 있다.
+
+
+| 구분 | Thread | Virtual Thread |
+|------|---------|----------------|
+| Stack 사이즈 | ~2MB | ~10KB |
+| 생성시간 | ~1ms | ~1µs |
+| 컨텍스트 스위칭 | ~100µs | ~10µs |
+
+
+Thread는 기본적으로 최대 2MB의 스택 메모리 사이즈를 가지기 때문에, 컨텍스트 스위칭 시 메모리 이동량이 크다. 또한 생성을 위해선 커널과 통신하여 스케줄링해야 하므로, 시스템 콜을 이용하기 때문에 생성 비용도 적지 않다.
+
+하지만 Virtual Thread는 JVM에 의해 생성되기 때문에 시스템 콜과 같은 커널 영역의 호출이 적고, 메모리 크기가 일반 스레드의 1%에 불과하다. 따라서 Thread에 비해 컨텍스트 스위칭 비용이 적다.
+
+**Virtual Thread는 JVM 내부 스케줄링과 Continuation 작업단위를 활용하여 I/O Blocking이 주된 병목인 경우에 처리량을 높일 수 있다.**
 
 ## JVM 내부 스케줄링
 JVM 내부 스케줄링 동작 메커니즘은 다음과 같다.
@@ -106,7 +120,7 @@ Work Stealing 메커니즘이란 Worker 스레드 각각 Work 큐를 가지고 �
 - Virtual Thread는 커널 영역 접근 없이 단순 Java 객체를 생성하므로 시스템콜이 발생하지 않기에 시스템콜로 인한 오버헤드가 발생하지 않게 된다.
 
 ## 캐리어 스레드와 1대N 매핑
-하나의 Carrier Thread의 작업큐에 여러 태스크들을 넣고 순차적으로 처리할 수 있다.
+하나의 Carrier Thread의 Work 큐에 여러 태스크들을 넣고 순차적으로 처리할 수 있다.
 
 ## 작업 단위 Continuation
 오래전부터 사용되던 프로그래밍 패러다임이다.
@@ -140,17 +154,17 @@ runContinuation은 Continuation 실행 람다이다. VirtualThread를 start 할�
 
 ![Image](https://github.com/user-attachments/assets/d0a2285a-5239-41b3-b83e-b9a9b3ed541a)
 
-만약 Cont1이 I/O, Sleep으로 인한 interrupt나 작업 완료시 yield 되어 작업이 중단되면 힙메모리로 넘어가게 되고 work 큐에서 제거된다.
+**만약 Cont1이 I/O, Sleep으로 인한 interrupt나 작업 완료시 yield 되어 작업이 중단되면 힙메모리로 넘어가게 되고 work 큐에서 제거된다.**
 
 ![Image](https://github.com/user-attachments/assets/e7dc8f4c-ffbd-4f64-8fe9-6450ef062721)
 
-그러면 Cont2가 이어서 작업을 실행하게 된다.
+**그러면 Cont2가 이어서 작업을 실행하게 된다.(위 메커니즘을 통해 컨텍스트 스위칭 비용을 줄어들게 된다)**
 
 이를 코드로 살펴보면 VirtualThread 클래스 내부 park 메서드가 실행될때 yield 된다.
 
 ![Image](https://github.com/user-attachments/assets/02207d50-39fb-4ba6-9e8e-a4b6d6210bbf)
 
-park 메서드는 패키지-프라이빗으로 되어있는데 LockSupport.park 메서드를 통해 실행시킬수 있으며 스레드가 블락킹된다.
+park 메서드는 package-private으로 되어있는데 LockSupport.park 메서드를 통해 실행시킬수 있으며 스레드가 블락킹된다.
 
 ![Image](https://github.com/user-attachments/assets/2fec74a8-415c-4dbd-9801-50fa29a3cca7)
 
@@ -172,7 +186,7 @@ park 메서드는 패키지-프라이빗으로 되어있는데 LockSupport.park 
 # 5. Virtual Thread 주의사항
 
 ## Carrier Thread 블로킹 현상(pin)
-Carrier Thread가 block 되면 Virtual Thread를 활용 불가하다. Continuation가 yield 되고 작업큐에서 빠져나오고 다시 스케줄링되는 과정들이 불가능해진다.
+Carrier Thread가 block 되면 Virtual Thread를 활용 불가하다. Continuation가 yield 되고 Work 큐에서 빠져나오고 다시 스케줄링되는 과정들이 불가능해진다.
 
 대표적으로 두 케이스에 대해 Virtual Thread는 Carrier Thread로부터 분리되지 않고 고정(pin)되어 위 현상이 발생하게 된다.
 - synchronized
@@ -203,8 +217,12 @@ Virtual Thread 는 무제한으로 생성하여 무제한으로 처리하기에 
 그리고 유한 리소스(DB 커넥션 등)의 경우 배압을 조절하도록 설정이 필요하다. DB 커넥션이 부족해서 문제 되는 경우가 존재할 수 있다.
 
 # 6. 결론
-
-![Image](https://github.com/user-attachments/assets/0167b493-09af-4744-ac49-875331d64a5e)
+- Virtual Thread는 가볍고, 빠르고, nonblocking인 경량 스레드다.
+- Virtual Thread는 JVM 스케줄링 + Continuation을 활용하여 내부 메커니즘이 동작한다.
+- Thread per request 사용중이고, I/O blocking time이 주된 병목인 경우 고려할 수 있다.
+- 쉽게 적용 가능하다.
+  - Reactive가 러닝커브로 부담되는 경우
+  - Kotlin coroutine이 러닝커브로 부담되는 경우
 
 # Reference
 - [https://techblog.woowahan.com/15398/](https://techblog.woowahan.com/15398/)
