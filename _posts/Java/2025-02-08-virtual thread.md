@@ -216,3 +216,6 @@ Virtual Thread 는 무제한으로 생성하여 무제한으로 처리하기에 
 # 결론
 
 ![Image](https://github.com/user-attachments/assets/0167b493-09af-4744-ac49-875331d64a5e)
+
+# Reference
+- [https://techblog.woowahan.com/15398/](https://techblog.woowahan.com/15398/)
