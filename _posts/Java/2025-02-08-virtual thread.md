@@ -7,7 +7,7 @@ toc: true
 comments: true
 ---
 
-> [https://www.youtube.com/watch?v=BZMZIM-n4C0](https://www.youtube.com/watch?v=BZMZIM-n4C0) ‘Java의 미래, Virtual Thread’ 우아한 테크 세미나 학습 내용을 정리하기 위한 포스입니다. 자세한 내용은 영상을 통해 참고해주세요😀
+> [‘Java의 미래, Virtual Thread’ 우아한 테크 세미나](https://www.youtube.com/watch?v=BZMZIM-n4C0) 학습 내용을 정리하기 위한 포스팅입니다. 자세한 내용은 영상을 통해 참고해주세요😀
 
 # 1. 일반 Thread 모델
 일반 스레드 모델은 다음과 같은 특징을 가진다.
