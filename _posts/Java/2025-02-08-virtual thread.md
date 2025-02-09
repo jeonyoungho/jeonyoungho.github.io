@@ -54,7 +54,7 @@ Thread에서 I/O작업을 처리할때 Blocking이 발생하여 대기 시간이
 ## 1-3. Reactive Programming 의 한계
 Thread 대기 시간을 줄이기 위해 Webflux 같은 개념이 등장했지만 코드를 작성하고 이해하기 어렵다.
 
-# Virtual Thread 모델
+# 2. Virtual Thread 모델
 Virtual Thread는 JDK21에 추가된 경량 스레드 모델이다. OS 커널단의 스레드를 사용하지 않고 JVM 내부 스케줄링을 통해 스레드를 생성하는 방식으로 수십만 ~ 수백만개의 스레드를 동시에 사용할 수 있다.
 
 Virtual Thread의 특징은 다음과 같다.
@@ -170,7 +170,7 @@ VirtualThread는 처리되던 runContinuation들이 I/O, Sleep으로 인한 inte
 - Virtual Thread는 작업 중단을 위해 Continuation yield 시킨다. 작업이 block 되어도 실제 스레드는 중단되지 않고 다른 작업을 처리한다.
 - **커널 스레드의 중단이 없으므로 시스템 콜이 발생하지 않게 되며 컨텍스트 스위칭 비용이 낮아지게 된다.**
 
-# 성능 테스트
+# 3. 성능 테스트
 
 <img width="684" alt="Image" src="https://github.com/user-attachments/assets/4564b056-c972-4801-b6f0-9c108ca5ba01" />
 
@@ -180,7 +180,7 @@ VirtualThread는 처리되던 runContinuation들이 I/O, Sleep으로 인한 inte
 
 자세한 내용은 [여기](https://techblog.woowahan.com/15398)를 참고하면 좋다.
 
-# Virtual Thread 주의사항
+# 4. Virtual Thread 주의사항
 
 ## 1. Carrier Thread 블로킹 현상(pin)
 Carrier Thread가 block 되면 Virtual Thread를 활용 불가하다. Continuation가 yield 되고 작업큐에서 빠져나오고 다시 스케줄링되는 과정들이 불가능해진다.
