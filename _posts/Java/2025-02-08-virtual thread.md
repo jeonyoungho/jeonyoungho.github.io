@@ -23,7 +23,7 @@ comments: true
 
 커널 스레드와 플랫폼 스레드는 1대1로 매핑되며 이 두 사이를 통신하는 과정(유저 영역에서 커널 영역의 기능을 사용)은 JNI(Java Native Interface)를 통한 시스템콜(system call)을 통해 이뤄진다. 
 
-플랫폼 스레드를 생성하는 과정은 다음과 같다.
+내부적인 실행 메커니즘은 다음과 같다.
 
 **1. 유저 영역(JVM)에 플랫폼 스레드 객체가 생성된다.**
 
@@ -33,7 +33,7 @@ comments: true
 
 ![Image](https://github.com/user-attachments/assets/3ec86494-5093-4e01-b7dc-1d07a4e47a7e)
 
-생성된 커널 스레드는 OS의 스케줄러에 의해 스케줄링되는 방식으로 동작한다.
+**3. 생성된 커널 스레드는 OS의 스케줄러에 의해 스케줄링되는 방식으로 동작한다.**
 
 이를 실제 자바 코드로 살펴보면 다음과 같다.
 
@@ -55,20 +55,12 @@ Thread에서 I/O작업을 처리할때 Blocking이 발생하여 대기 시간이
 Thread 대기 시간을 줄이기 위해 Webflux 같은 개념이 등장했지만 코드를 작성하고 이해하기 어렵다.
 
 # 3. Virtual Thread 모델
-Virtual Thread는 JDK21에 추가된 경량 스레드 모델이다. OS 커널단의 스레드를 사용하지 않고 JVM 내부 스케줄링을 통해 스레드를 생성하는 방식으로 수십만 ~ 수백만개의 스레드를 동시에 사용할 수 있다.
+Virtual Thread는 JDK21에 추가된 경량 스레드 모델이다. 
 
-Virtual Thread의 특징은 다음과 같다.
-
-## 가상 스레드
-JVM 내부에 생성되는 가상 스레드이다.  
+새로운 유저 스레드가 실행될때마다 OS 커널 스레드를 매번 생성하지 않고, JVM 내부 가상 스레드를 생성하는 방식으로 수십만 ~ 수백만개의 스레드를 동시에 사용할 수 있다. 생성된 가상 스레드는 JVM 내부 스케줄러에 의해 실행된다.
 
 ## JVM 내부 스케줄링
-
-<img width="481" alt="Image" src="https://github.com/user-attachments/assets/2e841d42-18ee-4c8a-acc9-a6f412f8eaae" />
-
-VirtualThread 위의 주석을 살펴보면 OS가 아닌 JVM에 의해 스케줄링되는 스레드라는 내용을 확인할 수 있다.
-
-JVM 내부 스케줄링은 다음과 같이 동작한다.
+JVM 내부 스케줄링 동작 메커니즘은 다음과 같다.
 
 **1. Virtual Thread 생성시 유저 영역에 생성된다.**
 
@@ -110,7 +102,7 @@ VirtualThread의 scheduler는 Executor 타입이다. 디폴트 스케줄러는 F
 
 Work Stealing 메커니즘이란 Worker 스레드 각각 Work 큐를 가지고 있고 Work 큐에 태스크를 담아 순차적으로 처리하는 방식이다. 다만, Worker 스레드는 자신의 Work 큐에 작업이 비어있으면 다른 Work 큐로부터 작업을 훔쳐와서 처리한다.
 
-### JVM 내부적인 스케줄링을 해야 하는 이유
+### ✨JVM 내부적인 스케줄링을 해야 하는 이유✨
 - 일반 스레드는 생성과 스케줄링시 커널 영역과 시스템콜을 통해 계속 통신해야되고 이 과정에서 오버헤드가 발생하게 된다.
 - Virtual 스레드는 커널 영역 접근 없이 단순 Java 객체를 생성하므로 시스템콜이 발생하지 않기에 시스템콜로 인한 오버헤드가 발생하지 않게 된다.
 
@@ -165,7 +157,7 @@ VirtualThread는 처리되던 runContinuation들이 I/O, Sleep으로 인한 inte
 
 ![Image](https://github.com/user-attachments/assets/2fec74a8-415c-4dbd-9801-50fa29a3cca7)
 
-### Continuation 사용 이유
+### ✨Continuation을 사용 하는 이유✨
 - 일반 Thread 모델은 작업 중단을 위해 커널 스레드를 중단시킨다.
 - Virtual Thread는 작업 중단을 위해 Continuation yield 시킨다. 작업이 block 되어도 실제 스레드는 중단되지 않고 다른 작업을 처리한다.
 - **커널 스레드의 중단이 없으므로 시스템 콜이 발생하지 않게 되며 컨텍스트 스위칭 비용이 낮아지게 된다.**
@@ -178,7 +170,7 @@ VirtualThread는 처리되던 runContinuation들이 I/O, Sleep으로 인한 inte
 - I/O Bound 작업은 50% 향상된 처리량 -> NIO로 동작하기에
 - CPU Bound 작업은 7% 낮된 처리량 -> CPU 연산 처리는 플랫폼 스레드 위에서 동작해야 하는데 Virtual Thread를 생성하고 스케줄링하는 비용이 낭비되기 때문에
 
-자세한 내용은 [여기](https://techblog.woowahan.com/15398)를 참고하면 좋다.
+보다 더 자세한 내용은 [여기](https://techblog.woowahan.com/15398)를 참고하기 바란다.
 
 # 5. Virtual Thread 주의사항
 
