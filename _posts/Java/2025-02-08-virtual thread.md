@@ -48,13 +48,13 @@ Thread.start 메서드를 호출하면 내부 start0 메서드를 통해 커널 
 ## 2-1. 일반 Thread 모델의 한계
 기본적인 요청 처리방식은 Thread per request(하나의 요청당 하나의 스레드로 처리하는 방식)이다. 요청 처리량을 높이려면 스레드를 늘려야하나 OS 커널단의 스레드 제약으로 무한히 늘릴 수 없다.
 
-## 1-2. Blocking I/O로 인한 대기 시간 증가
+## 2-2. Blocking I/O로 인한 대기 시간 증가
 Thread에서 I/O작업을 처리할때 Blocking이 발생하여 대기 시간이 증가하게 된다.
 
-## 1-3. Reactive Programming 의 한계
+## 2-3. Reactive Programming 의 한계
 Thread 대기 시간을 줄이기 위해 Webflux 같은 개념이 등장했지만 코드를 작성하고 이해하기 어렵다.
 
-# 2. Virtual Thread 모델
+# 3. Virtual Thread 모델
 Virtual Thread는 JDK21에 추가된 경량 스레드 모델이다. OS 커널단의 스레드를 사용하지 않고 JVM 내부 스케줄링을 통해 스레드를 생성하는 방식으로 수십만 ~ 수백만개의 스레드를 동시에 사용할 수 있다.
 
 Virtual Thread의 특징은 다음과 같다.
@@ -170,7 +170,7 @@ VirtualThread는 처리되던 runContinuation들이 I/O, Sleep으로 인한 inte
 - Virtual Thread는 작업 중단을 위해 Continuation yield 시킨다. 작업이 block 되어도 실제 스레드는 중단되지 않고 다른 작업을 처리한다.
 - **커널 스레드의 중단이 없으므로 시스템 콜이 발생하지 않게 되며 컨텍스트 스위칭 비용이 낮아지게 된다.**
 
-# 3. 성능 테스트
+# 4. 성능 테스트
 
 <img width="684" alt="Image" src="https://github.com/user-attachments/assets/4564b056-c972-4801-b6f0-9c108ca5ba01" />
 
@@ -180,9 +180,9 @@ VirtualThread는 처리되던 runContinuation들이 I/O, Sleep으로 인한 inte
 
 자세한 내용은 [여기](https://techblog.woowahan.com/15398)를 참고하면 좋다.
 
-# 4. Virtual Thread 주의사항
+# 5. Virtual Thread 주의사항
 
-## 1. Carrier Thread 블로킹 현상(pin)
+## Carrier Thread 블로킹 현상(pin)
 Carrier Thread가 block 되면 Virtual Thread를 활용 불가하다. Continuation가 yield 되고 작업큐에서 빠져나오고 다시 스케줄링되는 과정들이 불가능해진다.
 
 대표적으로 두 케이스에 대해 Virtual Thread는 Carrier Thread로부터 분리되지 않고 고정(pin)되어 위 현상이 발생하게 된다.
@@ -193,27 +193,27 @@ Virtual Thread의 synchronized, parrallelStream 을 사용하는 부분을 Reent
 
 위 현상은 `-Djdk.tracePinnedThreads=short, full` VM Option 으로 감지 가능하다.
 
-## 2. No Pooling
+## No Pooling
 Virtual Thread 생성비용이 저렴하기에 풀방식을 사용하지않고 사용할때마다 생성하고 GC처리하면 된다.
 
 오히려 풀방식을 사용하면 병목이 발생할 수 있다.
 
-## 3. CPU bound task
+## CPU bound task
 결국 Carrier Thread 위에서 CPU 연산이 수행되므로 성능을 효율적으로 사용하지 못하게 되며 nonblocking의 장점을 활용하지 못하게 된다.
 
-## 4. 경량 스레드
+## 경량 스레드
 ThreadLocal에 무거운 객체를 넣게 되면 Virtual Thread의 이점을 살릴수 없게 된다. 매번 생성하고 매번 파괴하기에 Memory를 사용하는 부분이 계속 늘어나게 된다. 
 
 JDK21의 preview 피처로 ScopedValue 라는 ThreadLocal을 대체하는 개념이 나왔다.
 
-## 5. 배압
+## 배압
 배압 조절 기능이 없다. 
 
 Virtual Thread 는 무제한으로 생성하여 무제한으로 처리하기에 서버가 가질수 있는 최대치를 내려고 할것이다. 그 과정에서 하드웨어 성능이 부족할 수 있기에 충분한 하드웨어 성능테스트가 필요하다.
 
 그리고 유한 리소스(DB 커넥션 등)의 경우 배압을 조절하도록 설정이 필요하다. DB 커넥션이 부족해서 문제 되는 경우가 존재할 수 있다.
 
-# 결론
+# 6. 결론
 
 ![Image](https://github.com/user-attachments/assets/0167b493-09af-4744-ac49-875331d64a5e)
 
