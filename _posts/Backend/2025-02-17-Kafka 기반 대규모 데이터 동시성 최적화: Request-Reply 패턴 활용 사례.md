@@ -5,7 +5,6 @@ categories: [Backend]
 tags: [woowacon24]
 toc: true
 comments: true
-published: false
 ---
 
 > 우아콘24의 ['Kafka 기반 대규모 데이터 동시성 최적화: Request-Reply 패턴 활용 사례'](https://www.youtube.com/watch?v=Rcow99TIMmc&list=PLgXGHBqgT2Tu7H-ita_W0IHospr64ON_a&index=5)' 에 대한 학습 내용을 정리하기 위한 목적의 TIL 포스팅입니다.🙆‍♂️
