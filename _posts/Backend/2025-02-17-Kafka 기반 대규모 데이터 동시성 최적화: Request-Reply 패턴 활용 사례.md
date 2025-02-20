@@ -51,3 +51,5 @@ comments: true
 
 - 레디스를 활용한 분산락과는 위와 같은 차이점이 존재하였음
 - 실제 적용 과정은 [여기](https://youtu.be/Rcow99TIMmc?si=mlaKu1-jPKJIvYbi&t=745)서부터 참고하면 됨
+
+> 현업에서 개발 중인 프로젝트에 대한 적용 과정은 추후 포스팅 예정입니다.😃
