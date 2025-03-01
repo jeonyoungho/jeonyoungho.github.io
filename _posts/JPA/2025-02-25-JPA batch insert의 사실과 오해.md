@@ -32,7 +32,7 @@ applicayion.yml에 jpa batch insert 설정을 적용하지 않고 시퀀스 전�
 
 그 다음으로 아래와 같이 JPA batch insert 설정을 추가후 동일한 테스트를 수행하였다.
 
-```json
+```yml
 spring:
   datasource:
     driver-class-name: xxx
