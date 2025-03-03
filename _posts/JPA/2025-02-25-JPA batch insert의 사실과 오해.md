@@ -1,5 +1,5 @@
 ---
-title: "Spring Data JPA batch insert의 사실과 오해"
+title: "Spring Data JPA Batch Insert의 사실과 오해"
 date: 2025-02-25 +0800
 categories: [JPA]
 tags: [jpa, springdatajpa, batchinsert, mariadb]
@@ -88,3 +88,4 @@ logging.level.org.hibernate.orm.jdbc.batch: trace
 위 로깅 설정을 추가하면 아래 이미지와 같이 batch insert가 적용된 것을 로그를 통해 확인할 수 있다.
 
 <img width="1179" alt="Image" src="https://github.com/user-attachments/assets/29c8a729-b58f-48ae-8b01-b5f2ca4ba191" />
+

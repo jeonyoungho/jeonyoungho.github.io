@@ -1,5 +1,5 @@
 ---
-title: "[Java] virtual thread"
+title: "[Java] Virtual Thread"
 date: 2025-02-08 +0800
 categories: [Java]
 tags: [java]
