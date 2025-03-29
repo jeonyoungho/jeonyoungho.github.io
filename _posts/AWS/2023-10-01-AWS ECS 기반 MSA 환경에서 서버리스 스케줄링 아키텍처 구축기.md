@@ -19,7 +19,7 @@ AWS ECS 기반 MSA 환경에서 첫 스케줄링이 필요한 요구사항이었
 
 이전에 [인사 데이터 동기화 배치 시스템](https://jeonyoungho.github.io/posts/AWS-%EC%84%9C%EB%B2%84%EB%A6%AC%EC%8A%A4-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EA%B8%B0%EB%B0%98-2,000%EC%97%AC%EB%AA%85-%EA%B3%A0%EA%B0%9D%EC%82%AC-%EC%9D%B8%EC%82%AC%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%8F%99%EA%B8%B0%ED%99%94-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EA%B5%AC%EC%B6%95%EA%B8%B0/)을 서버리스 아키텍처로 설계했던 경험을 바탕으로 AWS EventBridge와 Lambda 를 활용하였다.
 
-![Image](https://github.com/user-attachments/assets/dc513dee-dab8-459d-bba1-8569312f389e)
+![Image](/assets/img/posts/AWS/AWSECS기반MSA환경에서서버리스스케줄링아키텍처구축기_클라우드아키텍처.png)
 
 세부적인 실행 메커니즘은 다음과 같다.
 
@@ -80,7 +80,7 @@ AWS ECS 기반 MSA 환경에서 첫 스케줄링이 필요한 요구사항이었
 
 이를 개선하고자 한다면 HTTP 통신이 아닌 AWS MSK 메시지 기반으로 개선해볼 수 있을것 같다.
 
-![Image](https://github.com/user-attachments/assets/1b45c721-6ece-4abd-80c7-d09d47bba084)
+![Image](/assets/img/posts/AWS/AWSECS기반MSA환경에서서버리스스케줄링아키텍처구축기_MSK개선안아키텍처.png)
 
 여기서 kafka 컨슈머 구현시 메시지 중복 소비 현상을 주의해야할 것이다.
 
