@@ -1,7 +1,7 @@
 ---
 title: "Kafka Connect란"
 date: 2023-03-10 +0800
-categories: [MSA, Kafka]
+categories: [Backend, MSA]
 tags: [msa, kafka, kafkaconnect]
 toc: true
 comments: true

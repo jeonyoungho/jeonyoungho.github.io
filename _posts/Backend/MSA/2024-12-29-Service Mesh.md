@@ -1,7 +1,7 @@
 ---
 title: "Service Mesh"
 date: 2024-12-29 +0800
-categories: [MSA]
+categories: [Backend, MSA]
 tags: [msa, servicemesh]
 toc: true
 comments: true

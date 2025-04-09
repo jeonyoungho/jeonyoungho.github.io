@@ -1,7 +1,7 @@
 ---
 title: "Transactional Outbox Pattern"
 date: 2023-03-10 +0800
-categories: [MSA]
+categories: [Backend, MSA]
 tags: [msa, eventsource, transactionaloutboxpattern]
 toc: true
 comments: true

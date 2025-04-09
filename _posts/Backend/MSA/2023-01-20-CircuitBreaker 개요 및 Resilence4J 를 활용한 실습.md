@@ -1,7 +1,7 @@
 ---
 title: "CircuitBreaker 개요 및 Resilence4J 를 활용한 실습"
 date: 2023-01-20 +0800
-categories: [MSA, CircuitBreaker]
+categories: [Backend, MSA]
 tags: [msa, microservicearchitecture, circuitbreaker, hystrix, resilience4j]
 toc: true
 comments: true
