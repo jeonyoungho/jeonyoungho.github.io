@@ -1,12 +1,10 @@
 ---
 title: "[Java] 반복문(for문 forEach문 비교)"
-# post의 layout이 기본적으로 post으로 설정되어있어서 Front Matter에 따로 layout변수를 만들어 주지 않아도 된다.
 date: 2021-06-24 13:00:00 +0800
-categories: [Java] # categories는 최대 2개까지 가능
-tags: [java, forloop, foreach] # TAG는 반드시 소문자로 이루어져야함, 0~무한개까지 지정 가능
-# pin: true # 홈페이지 메인화면에 특정 게시물 고정
-toc: true # Table Of Content(TOC) 옵션, 기본적으로 포스트의 오른쪽 패널에 위치
-comments: true # 댓글 유무 지정
+categories: [Backend, Java]
+tags: [java, forloop, foreach]
+toc: true
+comments: true
 ---
 
 프로그래밍을 배우는데 있어서 기본 중의 하나는 반복문이다. 하지만 반복문을 어떻게 사용하느냐가 애플리케이션 성능에 얼마나 영향을 끼치는지 생각을 해보게되었다. Java에서 Collection을 순환할 때 forEach문을 자연스레 사용하고 있었고, 일반 for문하고 가독성 외에는 성능적으로 차이가 없을거라 생각했다. 하지만 for문과 forEach문은 완전 다른 방식으로 작동하고 있으며, 성능적으로 큰 차이가 있었다.

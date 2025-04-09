@@ -1,7 +1,7 @@
 ---
 title: "[Java] ZonedDateTime vs OffsetDateTime"
 date: 2024-11-25 +0800
-categories: [Java]
+categories: [Backend, Java]
 tags: [java]
 toc: true
 comments: true

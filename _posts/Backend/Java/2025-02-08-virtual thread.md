@@ -1,7 +1,7 @@
 ---
 title: "[Java] Virtual Thread"
 date: 2025-02-08 +0800
-categories: [Java]
+categories: [Backend, Java]
 tags: [java]
 toc: true
 comments: true

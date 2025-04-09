@@ -1,12 +1,10 @@
 ---
 title: "[Java] String & StringBuffer & StringBuilder"
-# post의 layout이 기본적으로 post으로 설정되어있어서 Front Matter에 따로 layout변수를 만들어 주지 않아도 된다.
 date: 2021-07-11 +0800
-categories: [Java] # categories는 최대 2개까지 가능
-tags: [java, string, stringbuffer, stringbuilder] # TAG는 반드시 소문자로 이루어져야함, 0~무한개까지 지정 가능
-# pin: true # 홈페이지 메인화면에 특정 게시물 고정
-toc: true # Table Of Content(TOC) 옵션, 기본적으로 포스트의 오른쪽 패널에 위치
-comments: true # 댓글 유무 지정
+categories: [Backend, Java]
+tags: [java, string, stringbuffer, stringbuilder]
+toc: true
+comments: true
 ---
 
 Java에서 문자열을 다루는 대표적인 클랫스로 String, StringBuffer, StringBuilder가 있습니다. 연산이 많지 않을때는 어떤 클래스를 사용하더라도 이슈가 발생할 가능성은 거의 없지만 연산 횟수가 많아지거나 멀티쓰레드를 사용하는 경우라면 <b>각 클래스의 특징을 이해하고 적절한 클래스를 사용해야 합니다.</b>
