@@ -1,7 +1,7 @@
 ---
 title: "MySQL VARCHAR vs TEXT"
 date: 2024-09-23 +0800
-categories: [Database]
+categories: [Backend, Database]
 tags: [database, mysql, mariadb]
 toc: true
 comments: true

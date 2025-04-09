@@ -1,7 +1,7 @@
 ---
 title: "DB Master&Slave Replication"
 date: 2024-12-30 +0800
-categories: [Database]
+categories: [Backend, Database]
 tags: [database, mysql, mariadb, masterslave, mha]
 toc: true
 comments: true

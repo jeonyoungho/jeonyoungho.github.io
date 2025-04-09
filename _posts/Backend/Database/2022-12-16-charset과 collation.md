@@ -1,12 +1,10 @@
 ---
-title: "[Database] charset과 collation" # post의 layout이 기본적으로 post로 설정되어있어서 Front Matter에 따로 layout변수를 만들어 주지 않아도 됨
+title: "[Database] charset과 collation"
 date: 2022-12-16 +0800
-categories: [Database] # categories는 최대 2개까지 가능
-tags: [database, mysql, mariadb] # TAG는 반드시 소문자로 이루어져야함, 0~무한개까지 지정 가능
-toc: true # Table Of Content(TOC) 옵션, 기본적으로 포스트의 오른쪽 패널에 위치
-comments: true # 댓글 유무 지정
-# image: /assets/img/test.png # Preview image
-# pin: true # 홈페이지 메인화면에 특정 게시물 고정
+categories: [Backend, Database]
+tags: [database, mysql, mariadb]
+toc: true
+comments: true
 ---
 
 MySQL 또는 MariaDB 를 사용하여 컬럼에 unqiue 제약 조건을 걸었더니 <b>대소문자를 구별하지 않는 것</b>을 새로 알게 되었고 그 이유에 대해서 알아보았다.
