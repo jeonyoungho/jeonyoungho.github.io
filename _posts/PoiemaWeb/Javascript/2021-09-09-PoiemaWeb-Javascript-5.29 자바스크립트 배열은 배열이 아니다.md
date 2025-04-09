@@ -1,12 +1,10 @@
 ---
-title: "[개발자 블로그] 5.29 자바스크립트 배열은 배열이 아니다" # post의 layout이 기본적으로 post로 설정되어있어서 Front Matter에 따로 layout변수를 만들어 주지 않아도 됨
+title: "[개발자 블로그] 5.29 자바스크립트 배열은 배열이 아니다"
 date: 2021-09-09 +0800
-categories: [PoiemaWeb, Javascript] # categories는 최대 2개까지 가능
-tags: [poiemaweb, javascript, es6] # TAG는 반드시 소문자로 이루어져야함, 0~무한개까지 지정 가능
-toc: true # Table Of Content(TOC) 옵션, 기본적으로 포스트의 오른쪽 패널에 위치
-comments: true # 댓글 유무 지정
-# image: /assets/img/test.png # Preview image
-# pin: true # 홈페이지 메인화면에 특정 게시물 고정
+categories: [Frontend, PoiemaWeb, Javascript]
+tags: [poiemaweb, javascript, es6]
+toc: true
+comments: true
 ---
 
 일반적으로 배열이라는 자료 구조의 개념은 동일한 크기의 메모리 공간이 빈틈없이 연속적으로 나열된 자료 구조를 말한다. 즉, 배열의 요소는 하나의 타입으로 통일되어 있으며 서로 연속적으로 인접해 있다. 이러한 배열을 `밀집 배열(dense array)`이라 한다.

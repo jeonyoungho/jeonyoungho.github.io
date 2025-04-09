@@ -1,12 +1,10 @@
 ---
-title: "[개발자 블로그] 5.17 this(PoiemaWeb-Javascript)" # post의 layout이 기본적으로 post로 설정되어있어서 Front Matter에 따로 layout변수를 만들어 주지 않아도 됨
+title: "[개발자 블로그] 5.17 this(PoiemaWeb-Javascript)"
 date: 2021-09-08 +0800
-categories: [PoiemaWeb, Javascript] # categories는 최대 2개까지 가능
-tags: [poiemaweb, javascript, es6] # TAG는 반드시 소문자로 이루어져야함, 0~무한개까지 지정 가능
-toc: true # Table Of Content(TOC) 옵션, 기본적으로 포스트의 오른쪽 패널에 위치
-comments: true # 댓글 유무 지정
-# image: /assets/img/test.png # Preview image
-# pin: true # 홈페이지 메인화면에 특정 게시물 고정
+categories: [Frontend, PoiemaWeb, Javascript]
+tags: [poiemaweb, javascript, es6]
+toc: true
+comments: true
 ---
 
 자바스크립트의 함수는 호출될 때, 매개변수로 전달되는 인자값 이외에, [arguments 객체](https://poiemaweb.com/js-function#61-arguments-%ED%94%84%EB%A1%9C%ED%8D%BC%ED%8B%B0)와 `this`를 암묵적으로 전달 받는다.

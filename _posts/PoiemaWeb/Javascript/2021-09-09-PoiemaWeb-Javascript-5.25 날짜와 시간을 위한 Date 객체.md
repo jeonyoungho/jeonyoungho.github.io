@@ -1,12 +1,10 @@
 ---
-title: "[개발자 블로그] 5.25 날짜와 시간을 위한 Date 객체" # post의 layout이 기본적으로 post로 설정되어있어서 Front Matter에 따로 layout변수를 만들어 주지 않아도 됨
+title: "[개발자 블로그] 5.25 날짜와 시간을 위한 Date 객체"
 date: 2021-09-09 +0800
-categories: [PoiemaWeb, Javascript] # categories는 최대 2개까지 가능
-tags: [poiemaweb, javascript, es6] # TAG는 반드시 소문자로 이루어져야함, 0~무한개까지 지정 가능
-toc: true # Table Of Content(TOC) 옵션, 기본적으로 포스트의 오른쪽 패널에 위치
-comments: true # 댓글 유무 지정
-# image: /assets/img/test.png # Preview image
-# pin: true # 홈페이지 메인화면에 특정 게시물 고정
+categories: [Frontend, PoiemaWeb, Javascript]
+tags: [poiemaweb, javascript, es6]
+toc: true
+comments: true
 ---
 
 Date 객체는 날짜와 시간(년, 월, 일, 시, 분, 초, 밀리초(천분의 1초(millisecond, ms)))을 위한 메소드를 제공하는 빌트인 객체이면서 생성자 함수이다.
