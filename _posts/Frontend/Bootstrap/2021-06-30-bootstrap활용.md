@@ -1,7 +1,7 @@
 ---
 title: "[Bootstrap] Bootstrap 활용"
 date: 2021-06-30 +0800
-categories: [Bootstrap]
+categories: [Frontend, Bootstrap]
 tags: [bootstrap]
 toc: true
 comments: true

@@ -1,7 +1,7 @@
 ---
 title: "[Bootstrap] Bootstrap 설치"
 date: 2021-06-30 +0800
-categories: [Bootstrap]
+categories: [Frontend, Bootstrap]
 tags: [bootstrap]
 toc: true
 comments: true
