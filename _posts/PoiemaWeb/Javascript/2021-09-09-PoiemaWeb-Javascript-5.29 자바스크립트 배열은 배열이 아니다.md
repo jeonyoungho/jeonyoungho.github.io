@@ -1,5 +1,5 @@
 ---
-title: "[개발자 블로그] 5.29 자바스크립트 배열은 배열이 아니다"
+title: "[PoiemaWeb] 5.29 자바스크립트 배열은 배열이 아니다"
 date: 2021-09-09 +0800
 categories: [Frontend, PoiemaWeb, Javascript]
 tags: [poiemaweb, javascript, es6]

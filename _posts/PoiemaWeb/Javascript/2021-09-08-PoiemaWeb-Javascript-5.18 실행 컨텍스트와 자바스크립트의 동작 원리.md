@@ -1,5 +1,5 @@
 ---
-title: "[개발자 블로그] 5.18 실행 컨텍스트와 자바스크립트의 동작 원리(PoiemaWeb-Javascript)"
+title: "[PoiemaWeb] 5.18 실행 컨텍스트와 자바스크립트의 동작 원리(PoiemaWeb-Javascript)"
 date: 2021-09-08 +0800
 categories: [Frontend, PoiemaWeb, Javascript]
 tags: [poiemaweb, javascript, es6]

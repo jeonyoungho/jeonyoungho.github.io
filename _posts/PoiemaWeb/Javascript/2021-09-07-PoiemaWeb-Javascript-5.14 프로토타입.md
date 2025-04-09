@@ -1,5 +1,5 @@
 ---
-title: "[개발자 블로그] 5.14 프로토타입(PoiemaWeb-Javascript)"
+title: "[PoiemaWeb] 5.14 프로토타입(PoiemaWeb-Javascript)"
 date: 2021-09-07 +0800
 categories: [Frontend, PoiemaWeb, Javascript]
 tags: [poiemaweb, javascript, es6]

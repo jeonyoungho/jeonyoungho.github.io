@@ -1,5 +1,5 @@
 ---
-title: "[개발자 블로그] 5.27 String 레퍼 객체"
+title: "[PoiemaWeb] 5.27 String 레퍼 객체"
 date: 2021-09-09 +0800
 categories: [Frontend, PoiemaWeb, Javascript]
 tags: [poiemaweb, javascript, es6]

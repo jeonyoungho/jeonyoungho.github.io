@@ -1,5 +1,5 @@
 ---
-title: "[개발자 블로그] 5.12 함수(PoiemaWeb-Javascript)"
+title: "[PoiemaWeb] 5.12 함수(PoiemaWeb-Javascript)"
 date: 2021-09-06 18:30:00 +0800
 categories: [Frontend, PoiemaWeb, Javascript]
 tags: [poiemaweb, javascript, es6]

@@ -1,5 +1,5 @@
 ---
-title: "[개발자 블로그] 5.6 데이터 타입과 변수(PoiemaWeb-Javascript)"
+title: "[PoiemaWeb] 5.6 데이터 타입과 변수(PoiemaWeb-Javascript)"
 date: 2021-09-06 17:40:00 +0800
 categories: [Frontend, PoiemaWeb, Javascript]
 tags: [poiemaweb, javascript, es6]

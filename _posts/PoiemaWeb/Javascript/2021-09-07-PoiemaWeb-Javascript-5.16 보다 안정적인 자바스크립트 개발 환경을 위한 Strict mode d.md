@@ -1,5 +1,5 @@
 ---
-title: "[개발자 블로그] 5.16 보다 안정적인 자바스크립트 개발 환경을 위한 Strict mode(PoiemaWeb-Javascript)"
+title: "[PoiemaWeb] 5.16 보다 안정적인 자바스크립트 개발 환경을 위한 Strict mode(PoiemaWeb-Javascript)"
 date: 2021-09-07 +0800
 categories: [Frontend, PoiemaWeb, Javascript]
 tags: [poiemaweb, javascript, es6]

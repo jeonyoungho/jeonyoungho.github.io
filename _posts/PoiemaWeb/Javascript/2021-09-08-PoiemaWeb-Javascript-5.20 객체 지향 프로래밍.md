@@ -1,5 +1,5 @@
 ---
-title: "[개발자 블로그] 5.20 객체 지향 프로래밍(PoiemaWeb-Javascript)"
+title: "[PoiemaWeb] 5.20 객체 지향 프로래밍(PoiemaWeb-Javascript)"
 date: 2021-09-08 +0800
 categories: [Frontend, PoiemaWeb, Javascript]
 tags: [poiemaweb, javascript, es6]

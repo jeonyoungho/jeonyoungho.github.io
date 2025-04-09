@@ -1,5 +1,5 @@
 ---
-title: "[개발자 블로그] 5.19 클로저(PoiemaWeb-Javascript)"
+title: "[PoiemaWeb] 5.19 클로저(PoiemaWeb-Javascript)"
 date: 2021-09-08 +0800
 categories: [Frontend, PoiemaWeb, Javascript]
 tags: [poiemaweb, javascript, es6]

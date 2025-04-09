@@ -1,5 +1,5 @@
 ---
-title: "[개발자 블로그] 5.28 배열"
+title: "[PoiemaWeb] 5.28 배열"
 date: 2021-09-09 +0800
 categories: [Frontend, PoiemaWeb, Javascript]
 tags: [poiemaweb, javascript, es6]

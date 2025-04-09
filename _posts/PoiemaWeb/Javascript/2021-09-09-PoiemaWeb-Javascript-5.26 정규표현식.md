@@ -1,5 +1,5 @@
 ---
-title: "[개발자 블로그] 5.26 정규표현식"
+title: "[PoiemaWeb] 5.26 정규표현식"
 date: 2021-09-09 +0800
 categories: [Frontend, PoiemaWeb, Javascript]
 tags: [poiemaweb, javascript, es6]
