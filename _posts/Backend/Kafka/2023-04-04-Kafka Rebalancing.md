@@ -1,8 +1,8 @@
 ---
 title: "Kafka Rebalancing"
 date: 2023-04-04 +0800
-categories: [MessageQueue, Kafka]
-tags: [messagequeue, kafka, rebalancing]
+categories: [Backend, Kafka]
+tags: [kafka, rebalancing]
 toc: true
 comments: true
 ---
