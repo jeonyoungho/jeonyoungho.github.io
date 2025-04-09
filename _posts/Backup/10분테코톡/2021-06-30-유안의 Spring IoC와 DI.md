@@ -5,6 +5,7 @@ categories: [10분 테코톡]
 tags: [java, spring, ioc, di]
 toc: true
 comments: true
+published: false
 ---
 
 - [유튜브 영상](https://www.youtube.com/watch?v=_OI9mKuFb7c&list=PLgXGHBqgT2TvpJ_p9L_yZKPifgdBOzdVH&index=24)

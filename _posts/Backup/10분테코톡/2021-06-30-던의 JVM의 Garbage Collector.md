@@ -5,6 +5,7 @@ categories: [10분 테코톡]
 tags: [java, gc, garbagecollector]
 toc: true
 comments: true
+published: false
 ---
 
 - [유튜브 영상](https://www.youtube.com/watch?v=vZRmCbl871I&list=PLgXGHBqgT2TvpJ_p9L_yZKPifgdBOzdVH&index=71)

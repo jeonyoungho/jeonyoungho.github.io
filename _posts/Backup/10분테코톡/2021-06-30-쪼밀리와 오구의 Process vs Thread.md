@@ -5,6 +5,7 @@ categories: [10분 테코톡]
 tags: [process, thread, os]
 toc: true
 comments: true
+published: false
 ---
 
 - [유튜브 영상](https://www.youtube.com/watch?v=DmZnOg5Ced8&list=RDCMUC-mOekGSesms0agFntnQang&index=4)
