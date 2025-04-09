@@ -1,7 +1,7 @@
 ---
 title: "Message Queue"
 date: 2021-06-30 +0800
-categories: [MessageQueue]
+categories: [DevOps, MessageQueue]
 tags: [messagequeue]
 toc: true
 comments: true
