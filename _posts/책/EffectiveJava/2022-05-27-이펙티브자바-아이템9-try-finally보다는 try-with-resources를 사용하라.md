@@ -1,7 +1,7 @@
 ---
 title: "[이펙티브자바] 아이템9-try-finally보다는 try-with-resources를 사용하라"
 date: 2022-05-27 +0800
-categories: [Java, EffectiveJava]
+categories: [책, EffectiveJava]
 tags: [java, effectivejava]
 toc: true
 comments: true

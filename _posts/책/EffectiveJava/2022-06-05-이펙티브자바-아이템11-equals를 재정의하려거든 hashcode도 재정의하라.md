@@ -1,7 +1,7 @@
 ---
 title: "[이펙티브자바] 아이템11-equals를 재정의하려거든 hashcode도 재정의하라"
 date: 2022-06-05 +0800
-categories: [Java, EffectiveJava]
+categories: [책, EffectiveJava]
 tags: [java, effectivejava]
 toc: true
 comments: true

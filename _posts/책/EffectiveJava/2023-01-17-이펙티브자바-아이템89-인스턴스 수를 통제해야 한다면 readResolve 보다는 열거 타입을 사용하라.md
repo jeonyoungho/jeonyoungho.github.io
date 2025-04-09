@@ -1,7 +1,7 @@
 ---
 title: "[이펙티브자바] 아이템89-인스턴스 수를 통제해야 한다면 readResolve 보다는 열거 타입을 사용하라"
 date: 2023-01-17 +0800
-categories: [Java, EffectiveJava]
+categories: [책, EffectiveJava]
 tags: [java, effectivejava]
 toc: true
 comments: true

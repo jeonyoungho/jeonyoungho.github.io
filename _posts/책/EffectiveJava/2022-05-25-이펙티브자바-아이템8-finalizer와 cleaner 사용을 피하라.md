@@ -1,7 +1,7 @@
 ---
 title: "[이펙티브자바] 아이템8-finalizer와 cleaner 사용을 피하라"
 date: 2022-05-25 +0800
-categories: [Java, EffectiveJava]
+categories: [책, EffectiveJava]
 tags: [java, effectivejava]
 toc: true
 comments: true
