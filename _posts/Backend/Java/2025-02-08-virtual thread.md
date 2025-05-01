@@ -89,7 +89,7 @@ JVM 내부 스케줄링 동작 메커니즘은 다음과 같다.
 
 ![Image](https://github.com/user-attachments/assets/2b10a65e-7d00-4fc6-8087-9e65c32e9474)
 
-VirtualThread의 start 함수를 실행하면 내부 submitRunContinuation 메서드를 실행하여 JVM 내 가상스레드 스케줄러에 runConfiguration을 등록한다.
+VirtualThread의 start 함수를 실행하면 내부 submitRunContinuation 메서드를 실행하여 JVM 내 가상스레드 스케줄러에 runContinuation을 등록한다.
 
 ![Image](https://github.com/user-attachments/assets/aacc1a26-7b27-4287-85d2-4b7afe734731)
 
@@ -179,7 +179,7 @@ park 메서드는 package-private으로 되어있는데 LockSupport.park 메서�
 
 일반 Thread 방식에 비해
 - I/O Bound 작업은 50% 향상된 처리량 -> NIO로 동작하기에
-- CPU Bound 작업은 7% 낮된 처리량 -> CPU 연산 처리는 플랫폼 스레드 위에서 동작해야 하는데 Virtual Thread를 생성하고 스케줄링하는 비용이 낭비되기 때문에
+- CPU Bound 작업은 7% 낮은 처리량 -> CPU 연산 처리는 플랫폼 스레드 위에서 동작해야 하는데 Virtual Thread를 생성하고 스케줄링하는 비용이 낭비되기에
 
 보다 더 자세한 내용은 [여기](https://techblog.woowahan.com/15398)를 참고하기 바란다.
 
