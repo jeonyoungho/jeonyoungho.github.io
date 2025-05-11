@@ -11,6 +11,7 @@ MSA 환경에서 이벤트 기반 아키텍처(EDA)를 적용하여 두 서비�
 
 카프카 Consumer 메시지 처리 실패시 dead-letter를 어떻게 관리하고 재시도 전략을 수립하면 좋을지 깊게 고찰해보자.
 
+
 (잘못된 내용 및 피드백은 코멘트로 남겨주시면 최대한 빠르게 확인해보겠습니다😃)
 
 # DeadLetterPublishingRecoverer, DefaultErrorHandler를 활용한 지수 백오프 알고리즘 기반 재처리
@@ -61,7 +62,7 @@ public void consume(ConsumerRecord<String, KafkaOrderEventDto> consumerRecord,
 }
 ```
 
-결과는 아래 이미지와 같이 메시지 한 개를 처리하는데 약 8초가 소요되면서 메시지 처리 지연 현상이 발생하는 것을 확인할 수 있다.
+결과는 아래 이미지와 같이 메시지 한 개를 처리하는데 약 8초가 소요되며 메시지 처리 지연 현상이 발생하는 것을 확인할 수 있다.
 
 ![Image](/assets/img/posts/Backend/Kafka/Kafka_DeadLetter_메시지지연_스크린샷.png)
 
@@ -101,7 +102,7 @@ DB가 복구된후 해당 메시지는 재처리가 가능할 것이다.
 - Retry 할 수 없는 예외로는 코드 결함, 슬로우 쿼리로 인한 타임아웃 문제 등이 있을 것이다.
 - Retry 할 수 있는 예외로는 일시적인 네트워크 문제 및 DB, 외부 서비스 셧다운 등이 있을 것이다.
 - 원본 Exception 을 한 번 감싼 형태로 KafkaConsumer 계층의 예외로 감싸 던지는 구조가 될 것이다.
-- 메시지 처리 지연 현상을 방지하면서 비동기적으로 Retry를 적용하는 방법은 아래 포스팅들을 참고하면 된다.
+- 메시지 처리 지연 현상을 방지하면서 비동기적으로 Retry를 적용하는 방법은 아래 포스팅들을 참고하면 된다.(RetryTopicConfiguration 활용)
   - [https://gisungcu.tistory.com/531](https://gisungcu.tistory.com/531)
   - [https://velog.io/@wwlee94/Kafka-재시도-DLT-빌더-접근-방식으로-리팩토링](https://velog.io/@wwlee94/Kafka-재시도-DLT-빌더-접근-방식으로-리팩토링)
   - [https://kkang-joo.tistory.com/85](https://kkang-joo.tistory.com/85)
