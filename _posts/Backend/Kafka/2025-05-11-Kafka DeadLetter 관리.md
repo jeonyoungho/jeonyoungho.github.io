@@ -53,7 +53,7 @@ public void consume(ConsumerRecord<String, KafkaOrderEventDto> consumerRecord,
     String topic = consumerRecord.topic();
     String key = consumerRecord.key();
     KafkaOrderEventDto value = consumerRecord.value();
-    log.info("[KAFKA][CONSUMER] topic = {}, key = {}, value = {}", topic, key, value);
+    log.info("[Kafka][Consumer] Topic: {}, Partition: {},  Value: {}", topic, consumerRecord.partition(), value);
 
     throw new RuntimeException();
 
