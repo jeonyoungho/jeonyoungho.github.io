@@ -7,7 +7,7 @@ toc: true
 comments: true
 ---
 
-MSA 환경에서 이벤트 기반 아키텍처(EDA)를 적용하여 두 서비스 간에 데이터를 동기화할때 Kafka를 주로 사용된다.
+MSA 환경에서 이벤트 기반 아키텍처(EDA)를 적용할때 Kafka가 주로 사용되곤 한다.
 
 카프카 Consumer 메시지 처리 실패시 dead-letter를 어떻게 관리하고 재시도 전략을 수립하면 좋을지 깊게 고찰해보자.
 
