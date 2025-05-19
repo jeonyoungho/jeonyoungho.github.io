@@ -26,10 +26,10 @@ public DeadLetterPublishingRecoverer deadLetterPublishingRecoverer() {
 @Bean
 public DefaultErrorHandler defaultErrorHandler() {
     ExponentialBackOff backOff = new ExponentialBackOff();
-    backOff.setMaxAttempts(3); // 최대 n회 시도
-    backOff.setInitialInterval(1000L); // 1초 뒤부터 시작
-    backOff.setMultiplier(2.0); // 2배수
-    backOff.setMaxInterval(10000L); // 최대 10초
+    backOff.setMaxAttempts(3); // 최대 재시도 횟수
+    backOff.setInitialInterval(1000L); // 초기 재시도 간격
+    backOff.setMultiplier(2.0); // 재시도 간격 배수
+    backOff.setMaxInterval(10000L); // 최대 재시도 간격 
 
     return new DefaultErrorHandler(deadLetterPublishingRecoverer(), backOff);
 }
@@ -64,34 +64,19 @@ public void consume(ConsumerRecord<String, KafkaOrderEventDto> consumerRecord,
 ![Image](/assets/img/posts/Backend/Kafka/Kafka_DeadLetter_메시지지연_스크린샷.png)
 
 # dead-letter 발생 및 재처리 시나리오
-dead-letter 발생 및 재처리 시나리오에 대해 살펴보자.(실제 더 다양한 케이스들이 존재할 것이다) 
+dead-letter 발생 및 재처리 시나리오에 대해 살펴보자.(실제로는 더 다양한 케이스들이 존재할 것이다) 
 
-**1. 컨슈머 로직의 코드 결함**
-
-컨슈머 로직의 코드 결함을 해결후 해당 메시지는 재처리가 가능할 것이다.
-
-**2. 컨슈머 로직 정상 & Zero-Payload 방식에서 외부 서비스의 코드 결함으로 장애가 전파된 경우**
-
-외부 서비스의 코드 결함을 해결후 해당 메시지는 재처리가 가능할 것이다.
-
-**3. 컨슈머 로직 정상 & Zero-Payload 방식에서 외부 서비스의 슬로우 쿼리로 타임아웃이 발생한 경우**
-
-외부 서비스의 슬로우 쿼리를 해결후 해당 메시지는 재처리가 가능할 것이다.
-
-**4. 컨슈머 로직 정상 & Zero-Payload 방식에서 외부 서비스가 셧다운된 경우**
-
-외부 서비스가 다시 복구된후 해당 메시지는 재처리가 가능할 것이다.
-
-**5. 컨슈머 로직 정상 & DB 장애**
-
-DB가 복구된후 해당 메시지는 재처리가 가능할 것이다.
+- **1. 컨슈머 로직의 코드 결함**
+  - 컨슈머 로직의 코드 결함을 해결후 해당 메시지는 재처리가 가능할 것이다.
+- **2. 컨슈머 로직 정상 & Zero-Payload 방식에서 외부 서비스의 결함**
+  - 외부 서비스의 결함(코드결함, 슬로우 쿼리 등)을 해결후 해당 메시지는 재처리가 가능할 것이다.
+- **3. 컨슈머 로직 정상 & Zero-Payload 방식에서 외부 서비스가 셧다운된 경우**
+  - 외부 서비스가 다시 복구된후 해당 메시지는 재처리가 가능할 것이다.
+- **4. 컨슈머 로직 정상 & DB 장애**
+  - DB가 복구된후 해당 메시지는 재처리가 가능할 것이다.
 
 
-위 케이스들중 1, 2, 3번은 수동적인 원인 조치 및 복구의 과정이 필요하다.
-
-단 4, 5번의 경우엔 서버, DB의 자동 복구 메커니즘이 적용된 상태에서 해당 메시지 처리가 셧다운의 원인이 아니라면 자동 재처리를 적용해볼 수 있을것이다. 
-
-> **Note**: 만약 컨슈머의 메시지 처리 과정에서 외부 서비스 셧다운(ex. 외부 서비스의 internal-api 에서 대용량 데이터 조회 OOM 발생) or DB 셧다운(ex. 대용량 데이터 조회 및 처리 과정에서 발생하는 DB 부하)이 발생한 것이라면 동일한 셧다운 현상이 지속해서 발생할 것이다. 하지만 Zero-Payload 방식에서는 보통 PK 기반으로 조회하기에 대용량 데이터와 관련된 문제는 크게 고려하지 않아도 괜찮지 않을까 싶다..😂
+위 케이스들중 1, 2번은 수동 조치 및 복구의 과정이 필요할 것이며, 3, 4번은 자동 재처리를 적용해볼 수 있을것이다. 
 
 # 개선된 dead-letter 관리 및 재시도 전략
 위의 내용들을 고려하여 다음과 같은 2가지 dead-letter 관리 및 재시도 전략을 고려해볼 수 있을 것 같다.
@@ -104,7 +89,7 @@ dead-letter 메시지를 개발자가 확인후 수동으로 복구하는 방안
 ## 2. RetryTopicConfiguration 을 활용하여 Retry 할 수 있는 예외와 토픽을 식별후, 메시지 처리 지연 현상이 발생하지 않도록 비동기적으로 Retry 적용
 - Retry 할 수 있는 토픽으로는 비즈니스 중요도에 따라 식별될 수 있을 것이다.
 - Retry 할 수 있는 예외로는 일시적인 네트워크 문제 및 DB, 외부 서비스 셧다운 등이 있을 것이다.
-- 원본 Exception 을 한 번 감싼 형태로 KafkaConsumer 계층의 예외로 감싸 던지는 구조가 될 것이다.
+- 원본 Exception 을 래핑한 KafkaConsumer 계층의 예외로 던지는 구조가 될 것이다.
 - `RetryTopicConfiguration`을 활용하면 메시지 처리 지연 현상을 방지하면서 비동기적으로 Retry를 적용할 수 있다.
   - [https://gisungcu.tistory.com/531](https://gisungcu.tistory.com/531)
   - [https://velog.io/@wwlee94/Kafka-재시도-DLT-빌더-접근-방식으로-리팩토링](https://velog.io/@wwlee94/Kafka-재시도-DLT-빌더-접근-방식으로-리팩토링)
