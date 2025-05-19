@@ -14,8 +14,8 @@ MSA 환경에서 이벤트 기반 아키텍처(EDA)를 적용할때 Kafka가 주
 
 (잘못된 내용 및 피드백은 코멘트로 남겨주시면 최대한 빠르게 확인해보겠습니다😃)
 
-# DeadLetterPublishingRecoverer, DefaultErrorHandler를 활용한 지수 백오프 알고리즘 기반 재처리
-spring-kafka에서 제공하는 DeadLetterPublishingRecoverer와 DefaultErrorHandler를 활용하여 지수백오프 알고리즘 기반으로 최대 3회까지 재시도를 할 수 있다.
+# DefaultErrorHandler를 활용한 재처리 전략
+가장 간단하게는 spring-kafka에서 제공하는 DefaultErrorHandler와 DeadLetterPublishingRecoverer를 활용하여 재시도 전략을 고민해볼 수 있다.
 
 ```java
 @Bean
@@ -26,7 +26,7 @@ public DeadLetterPublishingRecoverer deadLetterPublishingRecoverer() {
 @Bean
 public DefaultErrorHandler defaultErrorHandler() {
     ExponentialBackOff backOff = new ExponentialBackOff();
-    backOff.setMaxAttempts(3); // 최대 3회 시도
+    backOff.setMaxAttempts(3); // 최대 n회 시도
     backOff.setInitialInterval(1000L); // 1초 뒤부터 시작
     backOff.setMultiplier(2.0); // 2배수
     backOff.setMaxInterval(10000L); // 최대 10초
@@ -35,10 +35,7 @@ public DefaultErrorHandler defaultErrorHandler() {
 }
 ```
 
-**하지만 해당 위 방안은 몇 가지 문제가 존재한다.**
-
-# DeadLetterPublishingRecoverer, DefaultErrorHandler를 활용한 지수 백오프 알고리즘 기반 재처리의 문제점
-**재처리 과정에서 컨슈머의 이후 메시지 처리가 블로킹됨으로써 메시지 처리 지연 현상이 발생하게 된다.**
+**하지만 해당 위 방안은 치명적인 문제가 존재한다. 재처리 과정에서 컨슈머의 이후 메시지 처리가 블로킹됨으로써 메시지 처리 지연 현상이 발생하게 된다.**
 
 만약 프로듀서 애플리케이션에서 동시에 1000개의 메시지가 발행되었고, 컨슈머 로직의 코드결함으로 모든 메시지 처리에 문제가 발생했다고 가정해보자.
 
@@ -96,7 +93,7 @@ DB가 복구된후 해당 메시지는 재처리가 가능할 것이다.
 
 > **Note**: 만약 컨슈머의 메시지 처리 과정에서 외부 서비스 셧다운(ex. 외부 서비스의 internal-api 에서 대용량 데이터 조회 OOM 발생) or DB 셧다운(ex. 대용량 데이터 조회 및 처리 과정에서 발생하는 DB 부하)이 발생한 것이라면 동일한 셧다운 현상이 지속해서 발생할 것이다. 하지만 Zero-Payload 방식에서는 보통 PK 기반으로 조회하기에 대용량 데이터와 관련된 문제는 크게 고려하지 않아도 괜찮지 않을까 싶다..😂
 
-# dead-letter 관리 및 재시도 전략
+# 개선된 dead-letter 관리 및 재시도 전략
 위의 내용들을 고려하여 다음과 같은 2가지 dead-letter 관리 및 재시도 전략을 고려해볼 수 있을 것 같다.
 
 ## 1. 컨슈머 로직 실패시 Retry 없이 단일 dead-letter 토픽으로 메시지를 발행 및 컨슘후 별도 DB에 관리하여 개발자가 확인후 수동으로 백오피스 api를 통해 복구
