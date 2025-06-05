@@ -1,7 +1,7 @@
 ---
 title: "Transactional Outbox 패턴"
 date: 2025-06-03 +0800
-categories: [Backend, Kafka]
+categories: [Backend, MSA]
 tags: [kafka, domainevent]
 toc: true
 comments: true
