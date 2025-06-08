@@ -140,7 +140,7 @@ public class OutboxEventRelayProcessor {
 - 운영 유연성: 메시지 릴레이의 수정이 필요할 경우 독립적으로 수정하여 배포하면됨.
 
 
-팀과 프로젝트 상황에 따라 적절하게 선택하여 적용하는 것이 중요하다.
+이러한 세부적인 구현 세부사항은 팀과 프로젝트 상황에 따라 적절하게 선택하여 적용하는 것이 중요하다.
 
 ## 2. DB 트랜잭션 완료후 outbox 에 저장된 메시지 즉시 발행
 로컬 트랜잭션내에 저장된 outbox 메시지를 트랜잭션 완료후 즉시 메시지 브로커로 발행함으로써 주기적인 DB 폴링의 부하 없앨 수 있다.
@@ -190,3 +190,9 @@ public class OrderEventListener {
 **Transaction Log Tailing 방식**
 - 배민(Debezium): [https://techblog.woowahan.com/17386/](https://techblog.woowahan.com/17386/)
 
+# 정리
+- 이벤트 기반 아키텍처를 구현할때 DB 트랜잭션과 이벤트(메시지) 발행의 원자성 문제는 Transactional Outbox 패턴을 적용하여 해결할 수 있다.
+- Transactional Outbox 패턴은 Polling Publisher 방식과 Transaction Log Tailing 방식 두 가지가 존재한다.
+- Polling Publisher 방식은 outbox 테이블을 구성하여 발행될 메시지를 같은 DB 트랜잭션으로 영속화시켜둠으로써, 메시지 유실을 방지하는 기법이다.
+- Transaction Log Tailing은 DB의 binary log를 활용하여 CDC(Change Data Capture)를 구현하는 것이다. Debezium과 같은 오픈 소스가 주로 사용된다.
+- Polling Publisher 방식과 Transaction Log Tailing 방식의 장단점을 고려하여 팀과 프로젝트 상황에 적합한 방식으로 적절하게 선택하는 것이 중요하다.
