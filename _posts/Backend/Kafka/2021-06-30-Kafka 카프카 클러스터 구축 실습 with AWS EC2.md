@@ -1,5 +1,5 @@
 ---
-title: "Kafka-AWS에카프카클러스터실습(설치 및 실행)"
+title: "Kafka 카프카 클러스터 구축 실습 with AWS EC2"
 date: 2021-06-30 +0800
 categories: [Backend, Kafka]
 tags: [kafka]
@@ -7,7 +7,7 @@ toc: true
 comments: true
 ---
 
-# Kafka-AWS에카프카클러스터실습(설치 및 실행)
+# Kafka 카프카 클러스터 구축 실습 with AWS EC2
 - aws의 ec2 서버 3대를 발급받아서 카프카를 설치 후 console producer와 console consumer로 연동해보는 실습<br>
 - 아파치 카프카를 실행하기 위해선 2가지의 애플리케이션의 요구
     - zookeeper: 카프카 관련 정보를 저장하는 역할<br>
