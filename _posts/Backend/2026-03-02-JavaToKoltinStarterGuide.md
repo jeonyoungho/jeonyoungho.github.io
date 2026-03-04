@@ -1031,7 +1031,581 @@ class Person(
 - 사실 Setter 자체를 지양하기 때문에 커스텀 Setter도 잘 안쓴다.
   - => Setter 보다는 update같은 함수를 만들어서 그안에서 값을 업데이트 시켜주는게 훨씬 더 깔끔한 코드를 작성할 수 있다보니, Setter 자체를 잘 안쓰게되고 커스텀 Setter도 잘 안쓰게 된다.
 
+## 10강 - 코틀린에서 상속을 다루는 방법
 
+### 1) 추상 클래스
+
+```kotlin
+abstracrt class Animal (
+  protected val species: String,
+  protected val legCount: Int,
+) {
+  abstract fun move()
+}
+
+class Cat(
+  species: String // 콜론 사용, 타입은 콜론을 한 칸 뛰지않는것이 컨벤션
+) : Animal(species, 4) { // 상속할때는 : 콜론을 한 칸 뛰는것이 컨벤션
+// 괄호, 자식클래스의 주 생성자 매개변수를 통해 부모 클래스의 생성자를 바로 사용가능하다.
+  override fun move() {
+      println("고양이가 사뿐 사뿐 걸어가")
+  }
+}
+
+class Penguin(
+  private val wingCount: Int = 2,
+  species: String
+) : Animal(species, 2){
+
+  override fun move() {
+      println("펭귄이 움직인다")
+  }
+
+  // Animal의 legCount 에 open 키워드를 붙여줘야함
+  // 코틀린에서는 프로퍼티를 오버라이드할때 추상 프로퍼티가 아니라면 open 꼭 키워드를 붙여줘야함
+  override val legCount: Int 
+      get() = super.legCount + this.wingCount
+
+}
+```
+
+- 자바와 코틀린 모두 추상 클래스는 인스턴스화할 수 없다.
+
+### 2) 인터페이스
+
+```kotlin
+interface Flyable {
+  fun act() {
+    println("fly~~)
+  }
+
+  fun fly()
+}
+
+interface Swimable {
+  fun act() {
+    println("swim~~) // default 키워드 없이 구현 가능
+  }
+
+  fun fly() // 추상 메서드
+}
+
+class Penguin(
+  private val wingCount: Int = 2,
+  species: String
+) : Animal(species,2), Swimable,Flyable{ // 인터페이스 구현도 콜론 사용
+
+  override fun move() {
+      println("penguin move")
+  }
+
+  override val legCount: Int
+      get() = super.legCount + this.wingCount
+
+  override fun act() {
+      super<Swimable>.act() // 상위 인터페이스 함수 호출
+      super<Flyable>.act()
+  }
+}
+
+interface Swimable2 {
+
+    // 구현체에서 getter 를 구현하는걸 기대
+    // 코틀린에서는 backing field가 없는 프로퍼티를 인터페이스에 만들 수 있다.
+    val swimAbility: Int
+
+    val swimAbility2: Int
+      get() = 3
+
+    fun act(){
+        println("어푸")
+    }
+}
+
+class Penguin(
+    private val wingCount: Int = 2,
+    species: String
+) : Animal(species,2), Swimable2 {
+
+    override fun move() {
+        println("penguin move")
+    }
+
+    override val legCount: Int
+        get() = super.legCount + this.wingCount
+
+    override fun act() {
+        super<Swimable>.act()
+        super<Flyable>.act()
+    }
+
+    // getter 오버라이드
+    override val swimAbility: Int
+        get() = 3
+
+}
+```
+
+### 3) 클래스를 상속할 때 주의할 점
+
+```kotlin
+open class Base( // 상속 가능하도록 open 설정
+  open val number: Int = 100 // 해당 프로퍼티를 상속할 수 있도록 open 설정
+){
+  init {
+      println("Base Class")
+      println(number) 
+      // 상위 클래스에서 하위 클래스가 override 하고 있는 프로퍼티를 생성자 block이나 init 블락에서 참조하게 되면 하위 클래스는 초기화전 상태이므로 초기값인 0이 출력된다.
+      // 상위 클래스를 설계할 때 생성자 또는 초기화 블록에 사용되는 프로퍼티에는 open 을 꼭 피해야 한다.
+  }
+}
+
+class Derived(
+  override val number: Int
+) : Base(number) {
+
+  init {
+      println("Derived Class")
+  }
+}
+
+fun main() {
+  Derived(500)
+  // Base Class
+  // 0
+  // Derived class
+}
+```
+
+### 4) 상속 관련 지시어 정리
+**final**
+- override를 할 수 없게 한다. default로 보이지 않게 존재한다.
+- 여기서 final은 오버라이드 불가능을 뜻한다. 
+- 자바에서 final은 불변을 의미하고 코틀린에서 불변을 의미하는건 val이다.
+- 코틀린에서 모든 프로퍼티와 메서드는 암묵적으로 final이다. 즉 override가 기본적으로 막혀있다.
+
+**open** 
+- override를 열어 준다.
+- 기본적으로 override가 막혀있으니 override를 열어주는 키워드는 open이다. 
+
+**abstract**
+- 반드시 override 해야 한다.
+
+**override**
+- 상위 타입을 오버라이드 하고 있다.
+
+### 10강 정리
+- 상속 또는 구현을 할 때에 : 을 사용해야 한다.
+- 상위 클래스 상속을 구현할 때 생성자를 반드시 호출해야 한다.
+- override를 필수로 붙여야 한다.
+- 추상 멤버가 아니면 기본적으로 오버라이드가 불가능하다.
+  - open을 사용해주어야 한다.
+- 상위 클래스의 생성자 또는 초기화 블록에서 open 프로퍼티를 사용하면 얘기치 못한 버그가 생길 수 있다.
+
+## 11강 - 코틀린에서 접근 제어를 다루는 방법
+
+### 1) 자바와 코틀린의 가시성 제어
+
+| 접근제어자 | Java 접근 범위 | Kotlin 접근 범위 |
+|------------|----------------|------------------|
+| public | 모든 곳에서 접근 가능 | 모든 곳에서 접근 가능 |
+| protected | 같은 패키지 또는 하위 클래스에서만 접근 가능 | 선언된 클래스 또는 하위 클래스에서만 접근 가능 |
+| default / internal | 같은 패키지에서만 접근 가능 | 같은 모듈에서만 접근 가능 |
+| private | 선언된 클래스 내에서만 접근 가능 | 선언된 클래스 내에서만 접근 가능 |
+
+- 코틀린은 패키지라는 개념을 접근 제어 단위로 취급하지 않음
+- 코틀린에서의 모듈은 한 번에 컴파일 되는 Kotlin 코드
+  - IDEA Module, Maven artifact, Gradle Module 등 컴파일 파일의 집합
+  - 의존하는 외부 모듈에서 internal 키워드가 붙게되면 접근 불가능
+- 자바의 기본 접근 지시어는 default, 코틀린은 public
+
+### 2) 코틀린 파일의 접근 제어
+- 코틀린은 .kt 파일에 변수, 함수, 클래스 여러 개를 바로 만들 수 있다.
+
+```kotlin
+package lannstark.lec01
+
+val a = 3 // 변수도 가능
+
+fun add(num1: Int, num2: Int): Int { // 함수도 가능
+    return num1 + num2
+}
+
+class memo( // 클래스도 가능
+    var text:String
+)
+```
+
+- public: 기본값, 어디서든 접근 가능
+- protected: 파일(최상단)에는 사용 불가능
+- internal: 같은 모듈에서만 접근 가능
+- private: 같은 파일 내에서만 접근 가능
+
+### 3) 다양한 구성요소의 접근 제어
+
+**클래스 안의 멤버/생성자**
+- public: 기본값, 어디서든 접근 가능
+- protected: 선언된 클래스 또는 하위 클래스에서만 접근 가능
+- internal: 같은 모듈에서만 접근 가능
+- private: 선언된 클래스내에서만 접근 가능
+
+> 단, 생성자에 접근 제어자를 붙이려면 constructor 키워드를 붙여야한다.
+
+```kotlin
+class Bus internal constructor (
+  val price: Int
+)
+```
+
+**유틸 클래스**
+- Java에서 Util 클래스 구현시 abstract + private constructor 를 사용해서 인스턴스화를 막았다.
+
+```java
+public abstract class StringUtils {
+  private StringUtils() {}
+
+  public boolean isDirectorPath(String path) {
+    return path.endsWith("/);
+  }
+}
+```
+
+- 코틀린에서도 위와 비슷하게 가능하지만, 파일 최상단에 바로 유틸 함수를 작성하면 편하다.
+
+```kotlin
+== StringUtils.kt ==
+// 자바로 디컴파일해보면 StringUtilsKt 라는 유틸성 클래스가 동일하게 구현된걸 확인할 수 있다.
+// 자바 코드에서 StringUtilsKt.isDirectorPath 정적 메서드 형태로 사용 가능하다.
+fun isDirectorPath(path: String): Boolean {
+  return path.endsWith("/")
+}
+```
+
+**프로퍼티**
+
+```kotlin
+class Car(
+  internal name: String, // internal 키워드를 프로퍼티에 붙여 getter를 private 선언
+  internal var owner: String, // internal 키워드를 프로퍼티에 붙여 getter, setter 전부 private 선언
+  _price: Int
+) {
+  var price = _price // var price == public var price
+    private set // setter 만 private 선언
+}
+```
+
+### 4) Java와 Kotlin을 함께 사용할 경우 주의할 점
+- Internal은 바이트 코드 상 public이 된다.
+  - 그래서 Java 코드에서는 코틀린 모듈의 internal 코드를 가져 올 수 있다.
+- Kotlin의 protected와 Java의 protected는 다르다.
+  - Java는 같은 패키지의 Kotlin protected 멤버에 접근할 수 있다.
+
+### 11강 정리
+- Kotlin에서 패키지는 namespace 관리용이기 때문에 protected는 의미가 달라졌다.
+- Kotlin에서는 default가 사라지고, 모듈간의 접근을 통제하는 internal이 새로 생겼다.
+- 생성자에 접근 지시어를 붙일 때는 constructor를 명시적으로 써주어야 한다.
+- 유틸성 함수를 만들 때는 파일 최상단을 이용하면 편리하다
+- 프로퍼티의 custom setter에 접근 지시어를 붙일 수 있다.
+- Java에서 Kotlin 코드를 사용할 때 internal과 protected는 주의해야 한다.
+
+
+## 12강 - 코틀린에서 object 키워드를 다루는 방법
+> object는 코틀린에서 신규 추가된 키워드이다
+
+### 1) static 함수와 변수
+
+```kotlin
+== Java ==
+public class JavaPerson {
+
+  private static final int MIN_AGE = 1;
+
+  public static JavaPerson newBaby(String name) {
+    return new JavaPerson(name, MIN_AGE);
+  }
+
+  private String name;
+
+  private int age;
+
+  private JavaPerson(String name, int age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+== Kotlin ==
+class Person private constructor(
+  val name:String,
+  val age:Int
+){
+  /*
+  코틀린은 static 키워드가 없다.
+  static 대신 companion object(동반 객체)를 이용한다.
+  companion object 블록 안에 넣어둔 변수와 함수가 Java의 static 변수/함수인것처럼 사용된다.
+  */
+  companion object {
+      // const 키워드를 붙이면 컴파일시에 0이라는 값이 할당됨
+      // const 키워드가 없으면 런타임 시에 0이라는 값이 런타임에 할당됨
+      // const 는 진짜 상수에 붙이기 위한 용도
+      // 기본 타입과 String에 붙일 수 있음
+      private const val MIN_AGE: Int = 1
+
+      fun newBaby(name: String): Person {
+          return Person(name,MIN_AGE)
+      }
+  }
+}
+```
+
+**static**
+- 클래스가 인스턴스화 될 때 새로운 값이 복제되는게 아니라 정적으로 인스턴스끼리의 값을 공유
+
+**companion object**
+- 클래스와 동행하는 유일한 오브젝트
+- companion object(동반객체)도 하나의 객체로 간주된다. 때문에 이름을 붙일 수도 있고, interface를 구현할 수도 있다.
+- companion object에 유틸성 함수들을 넣어도 되지만, 최상단 파일을 활용하는 것을 추천한다.
+
+```kotlin
+interface Log {
+  fun log()
+}
+
+class Person private constructor(
+    val name:String,
+    val age:Int
+){
+
+    /*
+    Factory라는 객체 이름을 붙일수도 있고
+    Log와 같이 인터페이스를 구현할 수 있다.
+     */
+    companion object Factory :Log {
+        private const val MIN_AGE: Int = 1
+
+        fun newBaby(name: String): Person {
+            return Person(name,MIN_AGE)
+
+        }
+
+        override fun log() {
+            println("동행객체입니다~")
+        }
+    }
+
+    fun add(factory: Factory) {
+        println(factory.MIN_AGE) // 동행객체 사용가능
+    }
+}
+```
+
+- 만약 Java 코드에서 코틀린에 있는 static field나 static 함수를 사용한다면 아래와 같이 접근 가능하다.
+
+```java
+class Person private constructor(
+    val name:String,
+    val age:Int
+){
+  companion object {
+      private const val MIN_AGE: Int = 1
+
+      @JvmStatic
+      fun newBaby(name: String): Person {
+          return Person(name,MIN_AGE)
+      }
+  }
+}
+
+public class Prac {
+
+  public static void main(String[] args) {
+    // 동반객체에 이름이 없는 경우 Companion 이름을 통해 접근 가능
+    // 이름이 명시되지 않았다면 Companion이라는 이름이 생략된 것
+    Person.Companion.newBaby("jjaj"); 
+
+    // 동반객체에 이름이 있는 경우 해당 이름으로만 접근 가능
+    Person.Factor.newBaby("jjaj"); 
+
+    // @JvmStatic 어노테이션을 코틀린쪽에 붙이면 바로 접근 가능
+    Person.newBaby("jjaj");
+  }
+}
+```
+
+### 2) 싱글톤
+
+```kotlin
+== Java ==
+public class SingletonJava {
+  @Getter // 생성되는 getter 메서드는 필드의 static 여부를 따라간다.
+  private static final SingletonJava INSTANCE = new SingletonJava();
+
+  private SingletonJava() {}
+}
+
+class abc{
+  public static void main(String[] args) {
+      SingletonJava instance = SingletonJava.getINSTANCE();
+  }
+}
+
+== Kotlin ==
+// object 키워드만 붙이면됨
+object Singleton{
+  var a:Int = 0
+}
+
+fun main() {
+  // 바로 접근하면 됨
+  // 애당초 인스턴스가 하나이기에 싱글톤 클래스에 대해서는 인스턴스화를 하는게 아니라
+  // 코드에서 바로 .a/.함수 이런식으로 접근하면됨
+  // 직접적으로 싱글톤 객체를 만들일은 서버 개발시 많이 있진 않음
+  println(Singleton.a) 
+  Singleton.a += 10
+  println(Singleton.a)
+}
+```
+
+### 3) 익명 클래스
+- 특정 인터페이스나 클래스를 상속받은 구현체를 일회성으로 사용할 때 쓰는 클래스
+
+```kotlin
+== Java ==
+public interface Movable {
+  void move();
+  void fly();
+}
+
+public class Lec12Main {
+  public static void main(String[] args) {
+    moveSomething(new Movable() {
+      @Override
+      public void move() {
+        System.out.println("move");
+      }
+
+      @Override
+      public void fly() {
+        System.out.println("fly");
+      }
+    });
+  }
+
+  public static void moveSomething(Movable movable) {
+    movable.move();
+    movable.fly();
+  }
+}
+
+== Kotlin ==
+fun main() {
+  // 코틀린에서는 Movable을 상속받은 object를 만드는식으로 익명 클래스를 구현한다.
+  moveSomething(object : Movable{
+      override fun fly() {
+          println("플라이")
+      }
+
+      override fun move() {
+          println("무브")
+      }
+  })
+}
+```
+
+### 12강 정리
+- Java의 static 변수와 함수를 만드려면, Kotlin에서는 companion object를 사용해야 한다.
+- companion object도 하나의 객체로 간주되기에 이름을 붙일 수 있고, 다른 타입(인터페이스, 추상클래스 등)을 상속받을 수 있다.
+- Kotlin에서 싱글톤 클래스를 만들 때 object 키워드를 사용한다.
+- Kotlin에서 익명 클래스를 만들 때 'object : 타입'을 사용한다.
+
+## 13강 - 코틀린에서 중첩 클래스를 다루는 방법
+
+### 1) 중첩 클래스의 종류
+**자바에서의 중첩 클래스**
+- Static을 사용하는 중첩 클래스: 클래스 안에 static을 붙인 클래스, 밖의 클래스 직접 참조 불가
+- 내부 클래스(Innter Class): 클래스 안의 클래스, 밖의 클래스 직접 참조 가능
+
+```kotlin
+public class JavaHouse {
+
+  private String address;
+  private LivingRoom livingRoom;
+
+  public JavaHouse(String address) {
+    this.address = address;
+    this.livingRoom = new LivingRoom(10);
+  }
+
+  public LivingRoom getLivingRoom() {
+    return livingRoom;
+  }
+
+  public class LivingRoom {
+    private double area;
+
+    public LivingRoom(double area) {
+      this.area = area;
+    }
+
+    public String getAddress() {
+      return JavaHouse.this.address; // 밖의 클래스 직접 참조 가능
+    }
+  }
+}
+```
+
+- 이펙티브자바 아이템24, 86 기준으로 중첩 클래스 선언시 static 클래스를 사용하라고 가이드한다.
+  - 1)내부 클래스는 숨겨진 외부 클래스 정보를 가지고 있어, 참조를 해지하지 못하는 경우 메모리 누수가 생길 수 있다.
+  - 2)내부 클래스 직렬화 형태가 명확하게 정의되지 않아 직렬화에 제한이 있다.
+- **코틀린은 위 가이드를 충실히 준수한다.**
+
+```kotlin
+class JavaHouse(
+  private val addresss: String,
+  private val livingRoom: LivingRoom
+) {
+  // 그냥 클래스 만들듯이 편하게 작성하면됨
+  // 코틀린에서는 기본적으로 바깥 클래스에 대한 연결이 없는 중첩 클래스가 만들어짐
+  class LivingRoom(
+    private val area: Double
+  )
+}
+```
+
+### 2) 코틀린의 중첩 클래스와 내부 클래스
+**Java의 내부 클래스(권장되지 않은 클래스 안의 클래스, 바깥 클래스에 대한 참조를 가지는)**
+
+```kotlin
+class House(
+    private val address: String,
+    private val livingRoom: LivingRoom
+) {
+    // inner 키워드를 명시적으로 붙여줘야함
+    inner class LivingRoom(
+        private val area: Double
+    ){
+        val address:String
+            get() = this@House.address // 바깥 클래스 접근 (this@바깥클래스)
+    }
+}
+```
+
+### 13강 정리
+- 클래스 안에 클래스가 있는 경우는 두 가지였다.
+  - (Java 기준) static을 사용하는 클래스
+  - (Java 기준) static을 사용하지 않는 클래스
+- 권장되는 클래스는 static을 사용하는 클래스이다.
+- 코틀린에서는 이러한 가이드를 따르기 위해
+  - 클래스 안에 기본 클래스를 사용하면 바깥 클래스에 대한 참조가 없고
+  - 바깥 클래스를 참조하고 싶다면, inner 키워드를 붙여야 한다.
+- 코틀린 inner class에서 바깥 클래스를 참조하려면 'this@바깥클래스'를 사용해야 한다.
+
+| 구분 | 유형 | 바깥 클래스 참조 여부 |
+|------|------|----------------------|
+| Java | 클래스 안의 static 클래스 | 바깥 클래스 참조 없음 (권장되는 유형) |
+| Java | 클래스 안의 클래스 | 바깥 클래스 참조 있음 |
+| Kotlin | 클래스 안의 클래스 | 바깥 클래스 참조 없음 (권장되는 유형) |
+| Kotlin | 클래스 안의 inner 클래스 | 바깥 클래스 참조 있음 |
 
 # Reference
 - [https://www.inflearn.com/course/java-to-kotlin?cid=328606](https://www.inflearn.com/course/java-to-kotlin?cid=328606)
