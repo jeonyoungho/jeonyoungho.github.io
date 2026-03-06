@@ -2948,19 +2948,20 @@ person?.takeIf { it.isAdult }
 
 
 ## 강의 마무리
-- 강의에서 다룬 내용
-  - 변수와 타입
-  - 반복문과 제어문
-  - 예외처리
-  - OOP
-  - FP
-  - scope function
-- 다루지 못한 내용
-  - 제네릭
-  - 리플렉션
-  - 복잡한 함수형 프로그래밍
-  - DSL
-  - 동시성 프로그래밍 (코루틴)
+**강의에서 다룬 내용**
+- 변수와 타입
+- 반복문과 제어문
+- 예외처리
+- OOP
+- FP
+- scope function
+
+**다루지 못한 내용**
+- 제네릭
+- 리플렉션
+- 복잡한 함수형 프로그래밍
+- DSL
+- 동시성 프로그래밍 (코루틴)
 
 # Reference
 - [https://www.inflearn.com/course/java-to-kotlin?cid=328606](https://www.inflearn.com/course/java-to-kotlin?cid=328606)
