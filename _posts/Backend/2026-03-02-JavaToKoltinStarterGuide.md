@@ -7,6 +7,8 @@ toc: true
 comments: true
 ---
 
+> '[인프런: 자바 개발자를 위한 코틀린 입문](https://www.inflearn.com/course/java-to-kotlin?cid=328606&srsltid=AfmBOoo2YKo5bw5IuPMlvPb2awgizM1wMR-STNV_bj3xSJoNhJuUF6nr)'의 학습 내용을 정리하기 위한 목적의 TIL 포스팅입니다🙆‍♂️
+
 # 섹션2. 코틀린에서 변수와 타입, 연산자를 다루는 방법
 
 ## 1강 - 코틀린에서 변수를 다루는 방법
