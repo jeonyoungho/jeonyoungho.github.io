@@ -1,5 +1,5 @@
 ---
-title: "자바 개발자를 위한 코틀린 입문(Java to Kotlin Starter Guide) 내용 정리"
+title: "자바 개발자를 위한 코틀린 입문 내용 정리"
 date: 2026-02-02 +0800
 categories: [Backend]
 tags: [kotlin]
@@ -7,7 +7,7 @@ toc: true
 comments: true
 ---
 
-> '[인프런: 자바 개발자를 위한 코틀린 입문](https://www.inflearn.com/course/java-to-kotlin?cid=328606&srsltid=AfmBOoo2YKo5bw5IuPMlvPb2awgizM1wMR-STNV_bj3xSJoNhJuUF6nr)'의 학습 내용을 정리하기 위한 목적의 TIL 포스팅입니다🙆‍♂️
+> '[인프런: 자바 개발자를 위한 코틀린 입문(Java to Kotlin Starter Guide)](https://www.inflearn.com/course/java-to-kotlin?cid=328606&srsltid=AfmBOoo2YKo5bw5IuPMlvPb2awgizM1wMR-STNV_bj3xSJoNhJuUF6nr)'의 학습 내용을 정리하기 위한 목적의 TIL 포스팅입니다🙆‍♂️
 
 # 섹션2. 코틀린에서 변수와 타입, 연산자를 다루는 방법
 
@@ -540,7 +540,7 @@ fun parseIntOrThrow(str: String): Int {
 ### 2) Checked Exception과 Unchecked Exception
 
 ```kotlin
-== 자바 ==
+== Java ==
 public void readFile() throws IOException {
   File currentFile = new File(".");
   File file = new File(currentFile.getAbsoluteFile() + "/a.txt");
@@ -549,7 +549,7 @@ public void readFile() throws IOException {
   reader.close();
 }
 
-== 코틀린 ==
+== Kotlin ==
 fun readFile() { // throws 구문이 없다. 코틀린에서는 Checked Exception과 Unchecked Exception 을 구분하지 않는다. 모두 Unchecked Exception이다.
     val currentFile = File(".")
     val file = File(currentFile.absolutePath + "/a.txt")
@@ -562,14 +562,14 @@ fun readFile() { // throws 구문이 없다. 코틀린에서는 Checked Exceptio
 ### 3) try with resources
 
 ```kotlin
-== 자바 ==
+== Java ==
 public void readFile(String path) throws IOException {
   try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
     System.out.println(reader.readLine());
   }
 }
 
-== 코틀린 ==
+== Kotlin ==
 fun readfile(path: String) { // try-with-resources 구문 없음, use를 사용
   BufferedReader(FileReader(path)).use { bufferedReader ->
     println(bufferedReader.readLine())
@@ -934,12 +934,12 @@ fun main() {
 - 나이가 성인인지 확인하는 함수를 구현한다고 할때
 
 ```kotlin
-== 자바 ==
+== Java ==
 public boolean isAdult() {
   return this.age >= 20;
 }
 
-== 코틀린 ==
+== Kotlin ==
 class Person(
     val name: String = "gil",
     var age: Int = 10
